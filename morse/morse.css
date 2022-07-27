@@ -1,0 +1,88 @@
+@import url('../utils.css');
+
+h2 {
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+
+  font-variant: small-caps;
+}
+
+#to-translate, #translated, #play-feedback {
+  width: 100%;
+  padding: 1rem;
+  font-family: 'Roboto Mono', 'Consolas', monospace;
+  background-color: #cecece;
+  border: 1px solid #3e3e3e;
+  margin-bottom: 1rem;
+}
+
+#controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+}
+
+button {
+  margin: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #3e3e3e;
+  border-radius: 0.125rem;
+
+  background-color: #3e3e3e;
+  color: #cecece;
+}
+
+button:hover {
+  background-color: #cecece;
+  color: #3e3e3e;
+}
+
+button:active {
+  background-color: #3e3e3e;
+  color: white;
+}
+
+button.disabled {
+  background-color: #cecece;
+  color: #7e7e7e;
+  border: 1px solid #7e7e7e;
+  cursor: not-allowed;
+}
+
+#play-feedback {
+  width: 10rem;
+  height: 10rem;
+}
+
+/* Landscape phone and bigger */
+@media only screen and (min-width: 800px) {
+  #to-translate, #translated, #play-feedback {
+    max-width: 80%;
+  }
+}
+
+#to-translate:focus {
+  outline: none;
+}
+
+.error {
+  color: var(--red-hex);
+}
+
+.error[data-error] {
+  position: relative;
+}
+
+.error[data-error]:hover::after {
+  content: attr(data-error);
+  position: absolute;
+  top: 1.5em;
+  left: 0;
+  padding: 0.25rem;
+  background-color: var(--red-hex);
+  border: 1px dotted #3e3e3e;
+  color: white;
+  font-size: 75%;
+  z-index: 100;
+}

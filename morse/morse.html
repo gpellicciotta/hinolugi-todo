@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <title>Morse Code Translator</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Morse code translation utility">
+    <meta name='keywords' content='morse utility tool'>
+    <meta name='author' content='Giovanni Pellicciotta'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="image/svg" rel="shortcut icon" href="https://www.pellicciotta.com/hinolugi-support.js/img/hinolugi-icon.svg" >
+    <link rel="stylesheet" href="morse.css">
+    <script defer src="morse.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Morse Code Translator</h1>
+      <p>Convert text into morse code, or vice versa.</p>
+    </header>
+    <main>
+      <p>Just type normal text to convert to morse code.</p>
+      <p>Type morse code to convert to normal text.</p>
+      <p>&nbsp;</p>
+      <p>Use dots and either underscores or dashes for morse letters.</p>
+      <p>Use a single space to separate letters and either a forward slash or two or more spaces to separate words.</p>
+      <h2>To Translate</h2>
+      <input id="to-translate" type="text" placeholder="type text or morse code to be translated">
+      <h2>Translated</h2>
+      <p id="translated"></p>
+      <!-- 
+      <div id="controls">
+        <button id="play">Play</button>
+      </div>
+      <div id="play-feedback"></div>
+        -->
+    </main>
+    <footer>Copyright &copy; Giovanni Pellicciotta</footer>
+  </body>
+</html>

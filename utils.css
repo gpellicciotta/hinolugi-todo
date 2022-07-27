@@ -1,0 +1,91 @@
+@import url('https://www.pellicciotta.com/hinolugi-support.js/css/reset.css');
+@import url('https://www.pellicciotta.com/hinolugi-support.js/css/colors.css');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+  display: grid;
+  grid-template-rows: min-content auto min-content;
+
+  padding: 1rem;
+  min-height: 100vh;
+  height: 100%;
+
+  background-color: #cecece;
+  color:#3e3e3e;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  font-size: 300%;
+  font-weight: 600;
+  letter-spacing: 6;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: baseline;
+  align-items: center;
+  text-align: center;
+}
+
+h1 > img {
+  height: 1em;
+}
+
+header > p {
+  font-variant: small-caps;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-bottom: 2rem;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+table {
+  width: 80%;
+  box-shadow: none;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  padding: 0.5rem;
+  border: 1px solid #3e3e3e;
+}
+
+table th {
+  background-color: #3e3e3e;
+  color: #cecece;
+  text-align: left;
+}
+
+a {
+  display: inline-flex;
+  text-decoration: none;
+  color: #3e3e3e;
+  width: 100%;
+}
+
+a:hover {
+  background-color: #3e3e3e;
+  color: #cecece;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-variant: small-caps;
+  font-size: 80%;
+
+  padding: 0.25rem;
+  padding-top: 1rem;
+}
