@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <title>Box-Shadow Creator</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="box-shadow css property creator utility">
+    <meta name='keywords' content='box-shadow css utility tool'>
+    <meta name='author' content='Giovanni Pellicciotta'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="image/svg" rel="shortcut icon" href="https://www.pellicciotta.com/hinolugi-support.js/img/hinolugi-icon.svg">
+    <link rel="stylesheet" href="box-shadow.css">
+    <script defer src="box-shadow.js"></script>
+    <script defer src="tooltip.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Box-Shadow Creator</h1>
+      <p>Interactively create a CSS box-shadow value.</p>
+    </header>
+    <main>
+      <div id="controls">
+        <label description="The color of the box. The default value is the text color.">Box color</label>
+        <input id="box-color" type="color" placeholder="color" value="#cc0000">
+        <label description="The horizontal offset of the shadow. A positive value puts the shadow on the right side of the box, a negative value puts the shadow on the left side of the box">Horizontal offset</label>
+        <input id="x-pos" type="number" placeholder="horizontal-offset" value="5">
+        <label description="The vertical offset of the shadow. A positive value puts the shadow below the box, a negative value puts the shadow above the box">Vertical offset</label>
+        <input id="y-pos" type="number" placeholder="vertical-offset" value="5">
+        <label description="The blur radius. The higher the number, the more blurred the shadow will be">Blur radius</label>
+        <input id="blur" type="number" placeholder="blur-radius" value="5">
+        <label description="The spread radius. A positive value increases the size of the shadow, a negative value decreases the size of the shadow">Spread radius</label>
+        <input id="spread" type="number" placeholder="spread-radius" value="0">
+        <label description="The color of the shadow. The default value is black.">Shadow color</label>
+        <input id="shadow-color" type="color" placeholder="color" value="#000000">
+        <label description="The transparency of the shadow. The default value is 0.5.">Transparency</label>
+        <input id="transparency" type="range" min="0" max="100" placeholder="transparency" value="50">
+      </div>
+      <kbd id="box-shadow-property"></kbd>
+      <div id="box-shadow-preview"></div>
+    </main>
+    <footer>
+      <p>Box Shadow Creator v1.0.0</p>
+      <p>Copyright &copy; Giovanni Pellicciotta</p>
+      <p>See also <a href="https://blog.logrocket.com/three-ways-style-css-box-shadow-effects/">three-ways-style-css-box-shadow-effects</a></p>.
+    </footer>
+  </body>  
+</html>
