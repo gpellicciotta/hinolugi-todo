@@ -16,11 +16,34 @@ h2 {
   margin-bottom: 1rem;
 }
 
+kbd {
+  font-family: 'Roboto Mono', 'Consolas', monospace;
+}
+
+a[data-tooltip] {
+  margin: 4px;
+}
+
+@media (hover: none) {
+  a[data-tooltip]:focus, a[data-tooltip]:hover, a[data-tooltip]:active {
+    background-color: inherit;
+    color: inherit;
+  }
+}
+
+.tooltip {
+  display: none;
+  padding: 1em;
+  border: 1px dashed #3e3e3e;
+  border-radius: 1rem;
+  margin: 0.5rem;
+}
+
 #controls {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: baseline;
+  justify-content: space-around;
+  align-items: stretch;
 }
 
 button {
@@ -47,12 +70,18 @@ button.disabled {
   background-color: #cecece;
   color: #7e7e7e;
   border: 1px solid #7e7e7e;
-  cursor: not-allowed;
 }
 
 #play-feedback {
-  width: 10rem;
-  height: 10rem;
+  min-width: 10rem;
+  margin: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #3e3e3e;
+  border-radius: 0.125rem;
+}
+
+#play-feedback.on {
+  background-color: #3e3e3e;
 }
 
 /* Landscape phone and bigger */
