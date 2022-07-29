@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <title>ToDo List</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="todo list utility">
+    <meta name='keywords' content='todo utility tool'>
+    <meta name='author' content='Giovanni Pellicciotta'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="image/svg" rel="shortcut icon" href="https://www.pellicciotta.com/hinolugi-support.js/img/hinolugi-icon.svg" >
+    <link rel="stylesheet" href="todo.css">
+    <script defer src="todo.js"></script>
+    <script defer src="../tooltip.js"></script>
+    <script src="https://kit.fontawesome.com/1c60ca333d.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <header>
+      <h1>ToDo List</h1>
+      <p>No surprises here: it is what you <a href="#todo-tooltip" data-tooltip="todo-tooltip">expect</a>.</p>
+      <div class="tooltip" id="todo-tooltip">
+        <p>A list of items to keep track of.</p>
+        <p>Each item can be marked as <em>done</em> or <em>not</em>.</p>
+      </div>
+    </header>
+    <main>
+      <div id="controls">
+        <span></span>
+        <input id="new-item" name="new-item" type="text" placeholder="New item text">
+        <button class="icon-button" id="add-new-item" title="Add"><i class="fa-solid fa-plus"></i></button>
+      </div>
+      <ol id="todo-list">
+        <li id="item-1" class="item">
+          <input type="checkbox" checked>
+          <div class="item-content">
+            <span class="note">Create 'todo-list' project on github.</span>
+            <div class="tags">
+              <span class="created tag">2002-05-01 12:00:01</span>
+              <span class="last-modified tag">2002-05-01 12:00:01</span>
+            </div>
+          </div>
+          <button class="icon-button" title="Delete"><i class="fa-solid fa-trash"></i></button>
+        </li>
+        <li id="item-2" class="item">
+          <input type="checkbox">
+          <div class="item-content">
+            <span class="note">Make it work.</span>
+            <div class="tags">
+              <span class="created tag">2002-05-01 12:00:01</span>
+              <span class="last-modified tag">2002-05-01 12:00:01</span>
+            </div>
+          </div>
+          <button class="icon-button" title="Delete"><i class="fa-solid fa-trash"></i></button>
+        </li>
+        <li id="item-3" class="item">
+          <input type="checkbox">
+          <div class="item-content">
+            <span class="note">Publish it</span>
+            <div class="tags">
+              <span class="created tag">2002-05-01 12:00:01</span>
+              <span class="last-modified tag">2002-05-01 12:00:01</span>
+            </div>
+          </div>
+          <button class="icon-button" title="Delete"><i class="fa-solid fa-trash"></i></button>
+        </li>
+      </ol>
+    </main>
+    <footer>
+      <p>Todo List v1.0.0</p>
+      <p>Copyright &copy; Giovanni Pellicciotta</p>
+    </footer>
+  </body>
+</html>

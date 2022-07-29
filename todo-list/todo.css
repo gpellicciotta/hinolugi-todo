@@ -1,0 +1,196 @@
+@import url('../utils.css');
+
+body {
+  font-size: 150%;
+}
+
+kbd {
+  font-family: 'Roboto Mono', 'Consolas', monospace;
+}
+
+a[data-tooltip] {
+  margin: 4px;
+}
+
+#controls {
+  width: 100%;
+  margin-bottom: 2rem;
+  
+  display: grid;
+  grid-template-columns: 5rem auto 5rem;
+  justify-content: baseline;
+  align-items: center;
+}
+
+#todo-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+}
+
+#todo-list li {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 5rem auto 5rem;
+  justify-content: baseline;
+  align-items: center;
+}
+
+.item-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.note {
+  display: block;
+  width: 100%;
+}
+
+@media (hover: none) {
+  a[data-tooltip]:focus, a[data-tooltip]:hover, a[data-tooltip]:active {
+    background-color: inherit;
+    color: inherit;
+  }
+}
+
+.tooltip {
+  display: none;
+  padding: 1em;
+  border: 1px dashed #3e3e3e;
+  border-radius: 1rem;
+  margin: 0.5rem;
+}
+
+li > label {
+  color: #3e3e3e44;
+  justify-self: center;
+}
+
+li.done > label {
+  color: var(--blue-hex);
+}
+
+input[type="checkbox"], input[type="checkbox"]:hover, input[type="checkbox"]:focus, input[type="checkbox"]:active, input[type="checkbox"]:checked {
+  -webkit-appearance: none;
+  outline: none;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+input {
+  padding: 0.5rem;
+  outline: none;
+  border: 1px solid #3e3e3e;
+  border-radius: 0.125rem;
+    
+  color: #3e3e3e;
+  background-color: #cecece;
+}
+
+input:focus {
+  border: 1px solid var(--blue-hex);
+  color: var(--blue-hex);
+  background-color: white;
+}
+
+button {
+  margin: 1rem;
+  padding: 0.5rem;
+  border: 1px solid s#3e3e3e;
+  border-radius: 0.125rem;
+
+  background-color: #3e3e3e;
+  color: #cecece;
+}
+
+button.icon-button {
+  width: 2em;
+  height: 2em;
+  border-radius: 1em;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+button:hover {
+  background-color: var(--blue-hex);
+  color: white;
+}
+
+button:active {
+  background-color: var(--blue-hex);
+  color: #3e3e3e;
+}
+
+button.disabled {
+  background-color: #cecece;
+  color: #7e7e7e;
+  border: 1px solid #7e7e7e;
+}
+
+.tag.status {
+  display: none;
+}
+
+li.item.done .tag.status {
+  display: inline-flex;
+} 
+
+.tag.created::before {
+  content: "created:";
+  padding-right: 0.5em;
+}
+
+.tag.last-modified::before {
+  content: "last-modified:";
+  padding-right: 0.5em;
+}
+
+.tag {
+  font-size: 50%;
+
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-radius: 1em;
+  height: 2em;
+
+  border: 1px solid var(--blue-hex);
+  color: var(--blue-hex);
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.error {
+  color: var(--red-hex);
+}
+
+.error[data-error] {
+  position: relative;
+}
+
+.error[data-error]:hover::after {
+  content: attr(data-error);
+  position: absolute;
+  top: 1.5em;
+  left: 0;
+  padding: 0.25rem;
+  background-color: var(--red-hex);
+  border: 1px dotted #3e3e3e;
+  color: white;
+  font-size: 75%;
+  z-index: 100;
+}

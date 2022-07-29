@@ -83,13 +83,12 @@ table th {
 a {
   display: inline-flex;
   text-decoration: none;
-  color: inherit;
-  border-bottom: 2px dashed #3e3e3e;
+  color: var(--blue-hex);
 }
 
 a:hover {
-  background-color: #3e3e3e;
-  color: #cecece;
+  text-decoration: none;
+  color: inherit;
 }
 
 footer {
