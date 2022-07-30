@@ -8,7 +8,6 @@ h2 {
 }
 
 #to-translate, #translated, #play-feedback {
-  width: 100%;
   padding: 1rem;
   font-family: 'Roboto Mono', 'Consolas', monospace;
   background-color: #cecece;
@@ -42,7 +41,7 @@ a[data-tooltip] {
 #controls {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: stretch;
 }
 
@@ -86,8 +85,10 @@ button.disabled {
 
 /* Landscape phone and bigger */
 @media only screen and (min-width: 800px) {
-  #to-translate, #translated, #play-feedback {
-    max-width: 80%;
+  main {
+    /* Using max-width: 80% always aligns things left */
+    padding-left: 10%;
+    padding-right: 10%;
   }
 }
 
