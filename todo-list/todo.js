@@ -9,7 +9,7 @@ let itemsById = new Map();
 function loadFromStorage() {
   // Load state:
   let stateJSON = localStorage.getItem('todo') || EMPTY_STATE;
-  console.debug("Loaded from storage: " + stateJSON);
+  console.info("Loaded from storage: " + stateJSON);
   let state = JSON.parse(stateJSON);  
   maxItemId = state["max-item-id"] || 100;
   // Fill state:
@@ -26,7 +26,7 @@ function saveToStorage() {
   let stateJSON = JSON.stringify(state, ' ');
   try {
     localStorage.setItem('todo', stateJSON);
-    console.debug("Saving to storage succeeded");
+    console.info("Saving to storage succeeded");
   }
   catch (error) {
     // TODO: show notification
@@ -81,6 +81,23 @@ function createItemList() {
   items.forEach(addItemToList);
 }
 
+const ISO_REGEX = /^(\d\d\d\d[-]\d\d[-]\d\d)[T](\d\d[:]\d\d[:]\d\d).*$/;
+const SECONDS_IN_HOUR = 60 * 60;
+const SECONDS_IN_DAY = SECONDS_IN_HOUR * 24;
+
+function dateTagFromIsoString(isoString) {
+  let now = new Date();
+  let d = new Date(isoString);
+  let secondsDiff = Math.floor((now.getTime() - d.getTime()) / 1000);
+  let nowISO = now.toISOString();
+  let m1 = ISO_REGEX.exec(nowISO); 
+  let m2 = ISO_REGEX.exec(isoString);
+  if (m1[1] === m2[1]) { // Same day: only show time
+    return m1[2];
+  }
+  return m2[1];
+}
+
 function addItemToList(item) {
   let todoList = document.getElementById("todo-list");
 
@@ -88,14 +105,17 @@ function addItemToList(item) {
   newLiItem.setAttribute("id", "item-" + item.id);
   newLiItem.dataset.itemId = item.id;
   newLiItem.classList.add("item");
+  if (item.status === 'done') {
+    newLiItem.classList.add("done");
+  }
   newLiItem.innerHTML = `
     <label data-action="toggle" data-item-id="${item.id}"><i class="fa-solid fa-check"></i></label>
     <div class="item-content">
       <span data-action="edit" data-item-id="${item.id}" class="note">${item["note"]}</span>
       <div class="tags">
-        <span class="status tag" data-action="toggle" data-item-id="${item.id}">done</span>
-        <span class="created tag">${item["created-timestamp"]}</span>
-        <span class="last-modified tag">${item["last-modified-timestamp"]}</span>
+        <span class="status tag" data-action="toggle" data-item-id="${item.id}">${item["status"]}</span>
+        <span class="created tag">${dateTagFromIsoString(item["created-timestamp"])}</span>
+        <span class="last-modified tag">${dateTagFromIsoString(item["last-modified-timestamp"])}</span>
       </div>
     </div>
     <button class="icon-button" data-action="delete" data-item-id="${item.id}" title="Delete"><i class="fa-solid fa-trash"></i></button>
@@ -134,6 +154,7 @@ function indexOfItem(id) {
 }
 
 function markItem(id) {
+  console.info(`Trying to mark item with id ${id}`);
   let item = itemsById.get(id)
   if (!item) {
     console.error(`Cannot mark item with invalid id ${id}`);
@@ -146,6 +167,7 @@ function markItem(id) {
   else {
     item.status = 'done';
   }
+  item["last-modified-timestamp"] = new Date().toISOString();
   saveToStorage();
   // Update UI:
   let itemEl = document.getElementById("item-" + id);
@@ -159,9 +181,16 @@ function markItem(id) {
   else {
     itemEl.classList.remove("done");
   }
+  let lastModifiedEl = itemEl.querySelector(".tag.last-modified");
+  if (!lastModifiedEl) {
+    console.error(`Cannot find last-modified child tag element for item with id ${id}`);
+    return;
+  }
+  lastModifiedEl.innerText = dateTagFromIsoString(item["last-modified-timestamp"]);
 }
 
 function deleteItem(id) {
+  console.info(`Trying to delete item with id ${id}`);
   let idx = indexOfItem(id);
   if (idx < 0) {
     console.error(`Cannot delete item with invalid id ${id}`);
