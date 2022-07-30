@@ -1,7 +1,9 @@
 @import url('../utils.css');
 
-body {
-  font-size: 150%;
+@media only screen and (min-width: 600px) {
+  body {
+    font-size: 150%;
+  }
 }
 
 kbd {
@@ -13,13 +15,21 @@ a[data-tooltip] {
 }
 
 #controls {
-  width: 100%;
   margin-bottom: 2rem;
-  
+  width: 100%;
   display: grid;
   grid-template-columns: 5rem auto 5rem;
-  justify-content: baseline;
-  align-items: center;
+  justify-content: stretch;
+  align-items: stretch;
+}
+
+#controls > input {
+  min-width: 10rem;
+}
+
+#controls > button {
+  align-self: center;
+  justify-self: center;
 }
 
 #todo-list {
@@ -31,15 +41,14 @@ a[data-tooltip] {
 }
 
 #todo-list li {
-  width: 100%;
-
   display: grid;
   grid-template-columns: 5rem auto 5rem;
   justify-content: baseline;
-  align-items: center;
+  align-items: fl;
 }
 
 .item-content {
+  min-width: 10rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -47,7 +56,6 @@ a[data-tooltip] {
 
 .note {
   display: block;
-  width: 100%;
 }
 
 @media (hover: none) {
@@ -70,8 +78,16 @@ li > label {
   justify-self: center;
 }
 
+li > button {
+  justify-self: center;
+}
+
 li.done > label {
   color: var(--blue-hex);
+}
+
+li.done > .item-content > .note {
+  text-decoration: line-through;
 }
 
 input[type="checkbox"], input[type="checkbox"]:hover, input[type="checkbox"]:focus, input[type="checkbox"]:active, input[type="checkbox"]:checked {
@@ -101,7 +117,6 @@ input:focus {
 }
 
 button {
-  margin: 1rem;
   padding: 0.5rem;
   border: 1px solid s#3e3e3e;
   border-radius: 0.125rem;
@@ -111,9 +126,12 @@ button {
 }
 
 button.icon-button {
-  width: 2em;
-  height: 2em;
-  border-radius: 1em;
+  padding: 0.5rem; 
+  width: 2rem;
+  height: 2rem;
+  border-radius: 1rem;
+  line-height: 1rem;
+  font-size: 1rem;
 
   display: flex;
   justify-content: center;
@@ -137,6 +155,19 @@ button.disabled {
   border: 1px solid #7e7e7e;
 }
 
+@media only screen and (max-width: 600px) {
+  .tags {
+    display: none;
+  }
+}
+
+.tag {
+  -moz-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 .tag.status {
   display: none;
 }
@@ -144,6 +175,10 @@ button.disabled {
 li.item.done .tag.status {
   display: inline-flex;
 } 
+
+li.item {
+  margin-bottom: 3rem;
+}
 
 .tag.created::before {
   content: "created:";

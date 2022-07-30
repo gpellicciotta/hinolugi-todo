@@ -30,8 +30,8 @@
         <button class="icon-button" id="add-new-item" title="Add"><i class="fa-solid fa-plus"></i></button>
       </div>
       <ol id="todo-list">
-        <li id="item-1" class="item">
-          <input type="checkbox" checked>
+        <li id="item-1" data-item-id="1" class="item">
+          <label data-action="toggle" data-item-id="1"><i class="fa-solid fa-check"></i></label>
           <div class="item-content">
             <span class="note">Create 'todo-list' project on github.</span>
             <div class="tags">
@@ -39,10 +39,10 @@
               <span class="last-modified tag">2002-05-01 12:00:01</span>
             </div>
           </div>
-          <button class="icon-button" title="Delete"><i class="fa-solid fa-trash"></i></button>
+          <button class="icon-button" data-action="delete" data-item-id="1" title="Delete"><i class="fa-solid fa-trash"></i></button>
         </li>
-        <li id="item-2" class="item">
-          <input type="checkbox">
+        <li id="item-2" data-item-id="2" class="item">
+          <label data-action="toggle" data-item-id="2"><i class="fa-solid fa-check"></i></label>
           <div class="item-content">
             <span class="note">Make it work.</span>
             <div class="tags">
@@ -50,10 +50,10 @@
               <span class="last-modified tag">2002-05-01 12:00:01</span>
             </div>
           </div>
-          <button class="icon-button" title="Delete"><i class="fa-solid fa-trash"></i></button>
+          <button class="icon-button" data-action="delete" data-item-id="2" title="Delete"><i class="fa-solid fa-trash"></i></button>
         </li>
-        <li id="item-3" class="item">
-          <input type="checkbox">
+        <li id="item-3" class="item" data-item-id="3">
+          <label data-action="toggle" data-item-id="3"><i class="fa-solid fa-check"></i></label>
           <div class="item-content">
             <span class="note">Publish it</span>
             <div class="tags">
@@ -61,7 +61,7 @@
               <span class="last-modified tag">2002-05-01 12:00:01</span>
             </div>
           </div>
-          <button class="icon-button" title="Delete"><i class="fa-solid fa-trash"></i></button>
+          <button class="icon-button" data-action="delete" data-item-id="3" title="Delete"><i class="fa-solid fa-trash"></i></button>
         </li>
       </ol>
     </main>
