@@ -1,0 +1,43 @@
+@import url('../utils.css');
+
+kbd {
+  font-family: 'Roboto Mono', 'Consolas', monospace;
+}
+
+a[data-tooltip] {
+  margin: 4px;
+}
+
+#controls {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: 'Roboto Mono', 'Consolas', monospace;
+  font-size: 150%;
+  gap: 2rem;
+}
+
+#controls > input, #controls > input:focus {
+  outline: none;
+  min-width: 10rem;
+  padding: 0.5rem;
+}
+
+#controls > table {
+  width: max-content;
+}
+
+table, table tr, table th, table td {
+  background-color: var(--blue-hex);
+  color: white;
+  border: 1px solid white;
+  border-collapse: collapse;
+  padding: 0.5rem;
+  text-align: right;
+}
+
+table th {
+  font-weight: bolder;
+}
