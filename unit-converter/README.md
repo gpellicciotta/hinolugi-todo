@@ -10,7 +10,6 @@ Just enter a number and the chosen conversions will be shown.
 
 ### 1.5.0
 Enables adding/deleting conversions to be shown/used.
-Enables adding/deleting conversions to be shown/used.
 Remembers the chosen conversions locally.
 
 ### 2.0.0
