@@ -22,19 +22,39 @@
     <main>
       <div id="controls">
         <input id="amount" name="amount" type="number" placeholder="Amount to convert">
-        <table>
-          <tr><th>Euro (EUR)</th><th>Kuna (HRK)</th></tr>
-          <tr><td id="from-euro">?</td><td id="to-kuna">?</td></tr>
-          <tr><td id="to-euro">?</td><td id="from-kuna">?</td></tr>
+      </div>
+      <div id="output">
+        <table id="conversions">
+          <tr>
+            <td class="from-value">33.00</td>
+            <td class="from-unit" title="Kuna">HRK</td>
+            <td class="equal-sign">=</td>
+            <td class="to-value">4.39</td>
+            <td class="to-unit" title="Euro">€</td>
+            <td class="actions"><button class="icon-button" data-action="delete" data-item-id="2" title="Delete"><i class="fa-solid fa-trash"></i></button></td>
+          </tr>
+          <tr>
+            <td class="from-value">33.00</td>
+            <td class="from-unit" title="Euro">€</td>
+            <td class="equal-sign">=</td>
+            <td class="to-value">248.14</td>
+            <td class="to-unit" title="Kuna">HRK</td>
+            <td class="actions"><button class="icon-button" data-action="delete" data-item-id="2" title="Delete"><i class="fa-solid fa-trash"></i></button></td>
+          </tr>
         </table>
-        <div>
-          <p>1 euro = <span id="euro-to-kuna-exchange-rate">unknown</span> kuna</p>
-          <p>1 kuna = <span id="kuna-to-euro-exchange-rate">unknown</span> euro</p>
-        </div>
+      </div>
+      <div id="add-controls">
+        <datalist id="available-conversions">
+          <option value="kuna to euro"></option>
+          <option value="euro to kuna"></option>
+          <option value="fahrenheit to celsius"></option>
+        </datalist>
+        <input id="select-conversion-input" list="available-conversions" placeholder="Conversion to show"></input>
+        <button id="add-button" class="icon-button" data-action="add" title="Add Conversion"><i class="fa-solid fa-plus"></i></button>
       </div>
     </main>
     <footer>
-      <p>Unit Converter v1.0.0</p>
+      <p>Unit Converter v1.5.0</p>
       <p>Copyright &copy; Giovanni Pellicciotta</p>
     </footer>
   </body>
