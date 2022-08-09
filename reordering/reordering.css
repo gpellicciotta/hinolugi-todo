@@ -18,6 +18,8 @@ h2 {
 
 main {
   align-items: stretch;
+  max-width: 50rem;
+  justify-self: center;
 }
 
 #controls {
@@ -27,7 +29,6 @@ main {
   gap: 0.25rem 1rem;
   justify-items: stretch;
   align-items: baseline;
-  max-width: 100%;
 }
 
 label {
