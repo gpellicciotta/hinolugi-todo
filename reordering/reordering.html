@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <title>Re-Ordering Test</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="reordering tester utility">
+    <meta name='keywords' content='reordering css utility tool'>
+    <meta name='author' content='Giovanni Pellicciotta'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="image/svg" rel="shortcut icon" href="https://www.pellicciotta.com/hinolugi-support.js/img/hinolugi-icon.svg">
+    <link rel="stylesheet" href="reordering.css">
+    <script defer src="reordering.js"></script>
+    <script defer src="../tooltip.js"></script>
+    <script src="https://kit.fontawesome.com/1c60ca333d.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Re-Ordering Test</h1>
+      <p>Interactively re-order list items.</p>
+    </header>
+    <main>
+      <div id="controls">
+        <label description="The number of list items">List Item Count</label>
+        <input id="item-count" type="number" placeholder="Number of List Items" value="5">
+        <label description="Use a horizontal layout">Horizontal Layout</label>
+        <input id="horizontal" type="checkbox">
+      </div>
+      <div id="output">
+        <ol id="item-list" class="reordable">
+          <li id="item-1" class="item"><span draggable="true"><i class="fas fa-grip-lines"></i></span><span class="item-text"></span>List item #1</span></li>
+          <li id="item-2" class="item"><span draggable="true"><i class="fas fa-grip-lines"></i></span><span class="item-text">List item #2</span></li>
+          <li id="item-3" class="item"><span draggable="true"><i class="fas fa-grip-lines"></i></span><span class="item-text">List item #3</span></li>
+          <li id="item-4" class="item"><span draggable="true"><i class="fas fa-grip-lines"></i></span><span class="item-text">List item #4</span></li>
+          <li id="item-5" class="item"><span draggable="true"><i class="fas fa-grip-lines"></i></span><span class="item-text">List item #5</span></li>
+        </ol>
+      </div>
+    </main>
+    <footer>
+      <p>Re-Ordering Test v1.0.0</p>
+      <p>Copyright &copy; Giovanni Pellicciotta</p>
+      <p>See also <a href="https://dev.to/k_tsushima/item-re-order-by-drag-and-drop-written-in-vanilla-javascript-331h">Item re-order by drag and drop written in vanilla JavaScript</a></p>.
+    </footer>
+  </body>  
+</html>
