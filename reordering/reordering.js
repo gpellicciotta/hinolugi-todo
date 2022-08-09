@@ -35,7 +35,7 @@ function createList() {
     listEl.appendChild(createItem(i + 1));
   }
 
-  addListDragEventListeners();
+  makeReordable(listEl);
 }
 
 function createItem(itemNum) {
@@ -84,24 +84,27 @@ function endDrag(cancelled) {
   dragState.item.classList.remove("dragging");
 }
 
-function addListDragEventListeners() {
-  let listEl = document.getElementById("item-list");
-  // List events:
-  listEl.addEventListener("drop", () => { // Record successful drop (to make distinction from 'cancel'):
+function makeReordable(containerEl) {
+  console.log("Container", containerEl);
+  // Container events:
+  containerEl.addEventListener("drop", () => { // Record successful drop (to make distinction from 'cancel'):
     console.debug(`Drag-drop on list`);
     dragState.dropped = true;
   });
-  listEl.addEventListener("dragover", (ev) => { // Enable as drop-target:
+  containerEl.addEventListener("dragover", (ev) => { // Enable as drop-target:
     ev.preventDefault();
   });
-  listEl.addEventListener("dragend", () => { // Finish operation: cancel or finalize
+  containerEl.addEventListener("dragend", () => { // Finish operation: cancel or finalize
     console.debug(`Drag-end on list`);
     endDrag(!dragState.dropped)
   });
-  // List item events:
-  let listItemEls = listEl.querySelectorAll("li.item");
-  listItemEls.forEach((el) => { addItemDragEventListeners(el); });
-  listItemEls.forEach((el) => { addItemTouchEventListeners(el); });
+  // Child item events:
+  let childEls = containerEl.children;
+  for (let i = 0; i < childEls.length; i++) {
+    let el = childEls.item(i);
+    addItemDragEventListeners(el);
+    addItemTouchEventListeners(el); 
+  }
 }
 
 function addItemDragEventListeners(elem) {
@@ -120,7 +123,7 @@ function addItemDragEventListeners(elem) {
 }
 
 function addItemTouchEventListeners(elem) {
-  let draggablePart = elem.querySelector("[draggable]");
+  let draggablePart = elem;
   if (!draggablePart) {
     console.error("No draggable part found in " + elem.outerHTML);
     return ;
