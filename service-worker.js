@@ -1,7 +1,7 @@
 // Service-worker for back-ground caching and processing.
 // Must be put in root, otherwise it won't work
 
-const CACHE_VERSION = 'hinolugi-utils@v3'; // Update to force deleting any old cache and starting a new
+const CACHE_VERSION = 'hinolugi-utils@v4'; // Update to force deleting any old cache and starting a new
 
 const STATIC_ASSETS = [
   // Base assets:
@@ -38,6 +38,11 @@ const STATIC_ASSETS = [
   '/reordering/reordering.html',
   '/reordering/reordering.css',
   '/reordering/reordering.js',
+
+  // Box shadow CSS:
+  '/box-shadow/box-shadow.html',
+  '/box-shadow/box-shadow.css',
+  '/box-shadow/box-shadow.js'
 ];
 
 self.addEventListener('install', function(event) {

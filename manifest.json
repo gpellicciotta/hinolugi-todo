@@ -10,12 +10,12 @@
   "shortcuts": [
     {
       "name": "ToDo",
-      "url": "/todo-list/todo.html",
+      "url": "todo-list/todo.html",
       "description": "Keep track of things to be done"
     },
     {
       "name": "Morse",
-      "url": "/morse/morse.html",
+      "url": "https://utils.pellicciotta.com/morse/morse.html",
       "description": "Read or emit morse code"     
     },
     {
