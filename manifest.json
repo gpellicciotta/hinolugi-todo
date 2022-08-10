@@ -2,20 +2,20 @@
   "short_name": "HiNoLuGi Utils",
   "name": "HiNoLuGi Utils",
   "description": "Small utilities and tools",
-  "scope": "/",
-  "start_url": "/",
+  "scope": "https://utils.pellicciotta.com/",
+  "start_url": "https://utils.pellicciotta.com/",
   "background_color": "#cecece",
   "theme_color": "#3e3e3e",
   "display": "standalone",
   "shortcuts": [
     {
       "name": "ToDo",
-      "url": "todo-list/todo.html",
+      "url": "/todo-list/todo.html",
       "description": "Keep track of things to be done"
     },
     {
       "name": "Morse",
-      "url": "https://utils.pellicciotta.com/morse/morse.html",
+      "url": "/morse/morse.html",
       "description": "Read or emit morse code"     
     },
     {
@@ -28,11 +28,6 @@
     {
       "src": "https://www.pellicciotta.com/hinolugi-support.js/img/hinolugi-icon.svg",
       "type": "image/svg+xml",
-      "sizes": "512x512"
-    },
-    {
-      "src": "https://www.pellicciotta.com/hinolugi-support.js/img/hinolugi-icon.png",
-      "type": "image/png",
       "sizes": "512x512"
     }
   ]
