@@ -1,6 +1,7 @@
 {
   "short_name": "HiNoLuGi Utils",
   "name": "HiNoLuGi Utils",
+  "version": "1.9.0",
   "description": "Small utilities and tools",
   "scope": "/",
   "start_url": "/",
@@ -10,17 +11,17 @@
   "shortcuts": [
     {
       "name": "ToDo",
-      "url": "todo-list/todo.html",
+      "url": "/todo-list/todo.html",
       "description": "Keep track of things to be done"
     },
     {
       "name": "Morse",
-      "url": "morse/morse.html",
+      "url": "/morse/morse.html",
       "description": "Read or emit morse code"     
     },
     {
       "name": "Unit Converter",
-      "url": "unit-converter/unit-converter.html",
+      "url": "/unit-converter/unit-converter.html",
       "description": "Convert between various units"      
     }
   ],
