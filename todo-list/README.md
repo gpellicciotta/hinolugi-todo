@@ -8,9 +8,9 @@ A simple todo list, using the browser's local storage to have some form of persi
 Simple todo-list for adding, marking as done and deleting todo list items.
 
 ### 2.0.0
-- Allow multiple named lists, re-ordering of todo items and triggering
+- Allow multiple named lists
+- Allow re-ordering of todo items
 - Allow triggering an event when an item gets checked
-
 - Also still ensure datetime tags are shorter + synchronize every ... minute/hour ?
 
 ## See also
