@@ -2,25 +2,25 @@
   "short_name": "HiNoLuGi Utils",
   "name": "HiNoLuGi Utils",
   "description": "Small utilities and tools",
-  "scope": "https://utils.pellicciotta.com/",
-  "start_url": "https://utils.pellicciotta.com/",
+  "scope": "/",
+  "start_url": "/",
   "background_color": "#cecece",
   "theme_color": "#3e3e3e",
   "display": "standalone",
   "shortcuts": [
     {
       "name": "ToDo",
-      "url": "/todo-list/todo.html",
+      "url": "todo-list/todo.html",
       "description": "Keep track of things to be done"
     },
     {
       "name": "Morse",
-      "url": "/morse/morse.html",
+      "url": "morse/morse.html",
       "description": "Read or emit morse code"     
     },
     {
       "name": "Unit Converter",
-      "url": "/unit-converter/unit-converter.html",
+      "url": "unit-converter/unit-converter.html",
       "description": "Convert between various units"      
     }
   ],
