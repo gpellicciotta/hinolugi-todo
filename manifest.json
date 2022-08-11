@@ -1,7 +1,8 @@
 {
   "short_name": "HiNoLuGi Utils",
   "name": "HiNoLuGi Utils",
-  "version": "1.9.0",
+  "version": "1.10.0",
+  "id": "hinolugi-utils",
   "description": "Small utilities and tools",
   "scope": "/",
   "start_url": "/",
@@ -10,24 +11,81 @@
   "display": "standalone",
   "shortcuts": [
     {
-      "name": "ToDo",
+      "name": "ToDo List",
       "url": "/todo-list/todo.html",
-      "description": "Keep track of things to be done"
+      "description": "Keep track of things to be done",
+      "icons": [
+        {
+          "src": "/todo-list/todo-icon-512x512.png",
+          "sizes": "512x512"
+        },
+        {
+          "src": "/todo-list/todo-icon-96x96.png",
+          "sizes": "96x96"
+        },
+        {
+          "src": "/todo-list/todo-icon.svg",
+          "sizes": "512x512"
+        }
+      ]
     },
     {
-      "name": "Morse",
+      "name": "Morse Code Translator",
       "url": "/morse/morse.html",
-      "description": "Read or emit morse code"     
+      "description": "Read or emit morse code",
+      "icons": [
+        {
+          "src": "/morse/morse-icon-512x512.png",
+          "sizes": "512x512"
+        },
+        {
+          "src": "/morse/morse-icon-96x96.png",
+          "sizes": "96x96"
+        },
+        {
+          "src": "/morse/morse-icon.svg",
+          "sizes": "512x512"
+        }
+      ]
     },
     {
       "name": "Unit Converter",
       "url": "/unit-converter/unit-converter.html",
-      "description": "Convert between various units"      
+      "description": "Convert between various units",
+      "icons": [
+        {
+          "src": "/unit-converter/unit-converter-icon-512x512.png",
+          "sizes": "512x512"
+        },
+        {
+          "src": "/unit-converter/unit-converter-icon-96x96.png",
+          "sizes": "96x96"
+        },
+        {
+          "src": "/unit-converter/unit-converter-icon.svg",
+          "sizes": "512x512"
+        }
+      ]
     }
   ],
   "icons": [
     {
-      "src": "https://www.pellicciotta.com/hinolugi-support.js/img/hinolugi-icon.svg",
+      "src": "/hinolugi-utils-icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    { 
+      "src": "/hinolugi-utils-icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/hinolugi-utils-icon-96x96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "/hinolugi-utils-icon.svg",
       "type": "image/svg+xml",
       "sizes": "512x512"
     }

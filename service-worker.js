@@ -1,7 +1,7 @@
 // Service-worker for back-ground caching and processing.
 // Must be put in root, otherwise it won't work
 
-const CACHE_VERSION = 'hinolugi-utils@v4'; // Update to force deleting any old cache and starting a new
+const CACHE_VERSION = 'hinolugi-utils@v5'; // Update to force deleting any old cache and starting a new
 
 const STATIC_ASSETS = [
   // Base assets:
@@ -10,6 +10,9 @@ const STATIC_ASSETS = [
   '/utils.css',
   '/utils.js',
   '/tooltip.js',
+  '/hinolugi-utils-icon.svg',
+  '/hinolugi-utils-icon-512x512.png',
+  '/hinolugi-utils-icon-96x96.png',
 
   // Shared assets:
   'https://www.pellicciotta.com/hinolugi-support.js/img/hinolugi-icon.svg',
@@ -23,16 +26,22 @@ const STATIC_ASSETS = [
   '/unit-converter/unit-converter.html',
   '/unit-converter/unit-converter.css',
   '/unit-converter/unit-converter.js',
+  '/unit-converter/unit-converter-icon-96x96.png',
+  '/unit-converter/unit-converter-icon.svg',
 
   // Todo list:
   '/todo-list/todo.html',
   '/todo-list/todo.css',
   '/todo-list/todo.js',
+  '/todo-list/todo-icon-96x96.png',
+  '/todo-list/todo-icon.svg',
 
   // Morse code:
   '/morse/morse.html',
   '/morse/morse.css',
   '/morse/morse.js',
+  '/morse/morse-icon-96x96.png',
+  '/morse/morse-icon.svg',
 
   // Reordering:
   '/reordering/reordering.html',
