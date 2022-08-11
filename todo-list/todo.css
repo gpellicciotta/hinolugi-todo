@@ -6,21 +6,31 @@
   }
 }
 
-kbd {
-  font-family: 'Roboto Mono', 'Consolas', monospace;
-}
-
 a[data-tooltip] {
   margin: 4px;
 }
 
+main {
+  width: 100%;
+  max-width: 100vw;
+  margin-left: auto;
+  margin-right: auto;
+
+  display: grid;
+  grid-template-rows: min-content auto min-content;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 #controls {
-  margin-bottom: 2rem;
   width: 100%;
   display: grid;
   grid-template-columns: 5rem auto 5rem;
   justify-content: stretch;
   align-items: stretch;
+  margin-bottom: 2rem;
 }
 
 #controls > input {
@@ -38,24 +48,54 @@ a[data-tooltip] {
   flex-direction: column;
   justify-content: stretch;
   align-items: stretch;
+  gap: 1rem;
 }
 
-#todo-list li {
-  display: grid;
-  grid-template-columns: 5rem auto 5rem;
-  justify-content: baseline;
-  align-items: fl;
-}
-
-.item-content {
+.item {
+  border: 1px solid #3e3e3e;
+  background-color: white;
+  color: #3e3e3e;
+  
+  display: inline-grid;
+  gap: 0.5rem;
   min-width: 10rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  grid-template-areas: "item-actions item-actions"
+                       "item-status item-text"
+                       "item-status item-tags";
+  padding-bottom: 0.5rem;
+  grid-template-columns: 2rem auto;
 }
 
-.note {
-  display: block;
+.item-status {
+  grid-area: item-status;
+}
+
+.item-text {
+  grid-area: item-text;
+}
+
+.item-tags {
+  grid-area: item-tags;
+}
+
+.item > * {
+  min-width: 0px;
+}
+
+.item-actions {
+  grid-area: item-actions;
+  width: 100%;
+  display: none;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  background-color: #3e3e3e;
+  overflow: hidden;
+  padding-left: 0.5rem;
+}
+
+.item.selected > .item-actions {
+  display: flex;
 }
 
 @media (hover: none) {
@@ -176,10 +216,6 @@ li.item.done .tag.status {
   display: inline-flex;
 } 
 
-li.item {
-  margin-bottom: 3rem;
-}
-
 .tag.created::before {
   content: "created:";
   padding-right: 0.5em;
@@ -228,4 +264,25 @@ li.item {
   color: white;
   font-size: 75%;
   z-index: 100;
+}
+
+.item-actions>*[draggable] {
+  color: white;
+}
+
+.item-actions>button.icon-button {
+  border-radius: 50%;
+  color: white;
+  background-color: inherit;
+  border: none;
+}
+
+.item-actions>button.icon-button:active,
+.item-actions>button.icon-button:active * {
+  color: var(--red-hex);
+}
+
+.item>.item-actions>*[draggable]:hover,
+.item>.item-actions>*[data-action]:hover {
+  animation: tilt-shaking 0.15s infinite;
 }

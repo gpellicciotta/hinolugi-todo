@@ -4,12 +4,15 @@ A simple todo list, using the browser's local storage to have some form of persi
 
 ## Roadmap
 
-### 1.0.0 
-Simple todo-list for adding, marking as done and deleting todo list items.
+### 1.0.0 (= Current Major Version)
+- Simple todo-list for adding, marking as done and deleting todo list items.
 
 ### 2.0.0
+- Enables offline install.
+- Allows re-ordering the todo items.
+
+### Roadmap for Next Major Version
 - Allow multiple named lists
-- Allow re-ordering of todo items
 - Allow triggering an event when an item gets checked
 - Also still ensure datetime tags are shorter + synchronize every ... minute/hour ?
 

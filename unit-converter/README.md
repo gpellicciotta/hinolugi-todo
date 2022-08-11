@@ -12,11 +12,11 @@ Just enter a number and the chosen conversions will be shown.
 Enables adding/deleting conversions to be shown/used.
 Remembers the chosen conversions locally.
 
-### 2.0.0
-Enables configuring a custom conversion.
+### 2.0.0 (= Current Major Version)
 Enables offline install.
 Enables reordering the conversions.
 
-## See also
-  - 
+### Roadmap for Next Major Version
+Enable configuring a custom conversion.
+
   

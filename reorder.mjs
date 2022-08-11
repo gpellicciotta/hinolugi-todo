@@ -49,6 +49,41 @@ function endDrag(cancelled, dropCallBack) {
   };
 }
 
+const registeredListeners = new Map();
+let listenerId = 1;
+
+function addRevertibleEventListener(targetElement, eventName, eventCallback) {
+  const dataName = `data-reorder-${eventName}-listener`;
+  const listenerName = `listener-${listenerId++}`;
+  const listener = {
+    name: listenerName,
+    targetElement: targetElement,
+    eventName: eventName,
+    eventCallback, eventCallback
+  };
+  removeRevertibleEventListener(targetElement, eventName);
+  registeredListeners.set(listenerName, listener);
+  targetElement.setAttribute(dataName, listenerName);
+  targetElement.addEventListener(listener.eventName, listener.eventCallback);
+  //console.debug(`Event listener '${listenerName}' for event type '${listener.eventName}' has been added for:`, listener.targetElement);
+}
+
+function removeRevertibleEventListener(targetElement, eventName) {
+  const dataName = `data-reorder-${eventName}-listener`;
+  const listenerName = targetElement.getAttribute(dataName);
+  if (!listenerName) {
+    return ;
+  }
+  const listener = registeredListeners.get(listenerName);
+  if (listener) {
+    listener.targetElement.removeEventListener(listener.eventName, listener.eventCallback);
+    //console.debug(`Event listener '${listenerName}' for event type '${listener.eventName}' has been removed for:`, listener.targetElement);
+  }
+  else {
+    console.warn(`Event listener '${listenerName}' is unknown`);
+  }
+}
+
 /**
  * Make a container's child elements re-ordeable by enabling dragging them into a new position.
  * 
@@ -57,15 +92,15 @@ function endDrag(cancelled, dropCallBack) {
  */
 export function makeReordable(containerEl, dropCallBack) {
   // Container events:
-  containerEl.addEventListener("drop", () => { // Record successful drop (to make distinction from 'cancel'):
-    console.debug(`Drag-drop on list`);
+  addRevertibleEventListener(containerEl, "drop", () => { // Record successful drop (to make distinction from 'cancel'):
+    //console.debug(`Drag-drop on list: `, containerEl);
     dragState.dropped = true;
   });
-  containerEl.addEventListener("dragover", (ev) => { // Enable as drop-target:
+  addRevertibleEventListener(containerEl, "dragover", (ev) => { // Enable as drop-target:
     ev.preventDefault();
   });
-  containerEl.addEventListener("dragend", () => { // Finish operation: cancel or finalize
-    console.debug(`Drag-end on list`);
+  addRevertibleEventListener(containerEl, "dragend", () => { // Finish operation: cancel or finalize
+    //console.debug(`Drag-end on list: `, containerEl);
     endDrag(!dragState.dropped, dropCallBack)
   });
   // Child item events:
@@ -78,22 +113,21 @@ export function makeReordable(containerEl, dropCallBack) {
 }
 
 function addItemDragEventListeners(elem) {
-  elem.addEventListener("dragstart", (ev) => {
+  addRevertibleEventListener(elem, "dragstart", (ev) => {
     ev.dataTransfer.effectAllowed = "move";    
     ev.dataTransfer.setDragImage(elem, -20, -20);
-    console.debug(`Drag-start on '${elem.innerText}'`);
+    //console.debug(`Drag-start on: `, elem);
     startDrag(elem);
   });
-  elem.addEventListener("dragover", (ev) => {
+  addRevertibleEventListener(elem, "dragover", (ev) => {
     ev.preventDefault();
-    console.debug(`Drag-over on '${elem.innerText}'`);
+    //console.debug(`Drag-over on: `, elem);
     moveDragOver(elem);
   });
   return elem;
 }
 
 function checkCurrentlyDraggable(elem) {
-  console.log("Checking", elem);
   if (elem.hasAttribute("draggable")) {
     //console.debug("display: ", window.getComputedStyle(elem).display);
     //console.debug("visibility: ", window.getComputedStyle(elem).visibility);
@@ -116,15 +150,15 @@ function addItemTouchEventListeners(elem, dropCallBack) {
     console.error("No draggable part found in " + elem.outerHTML);
     return ;
   }
-  draggablePart.addEventListener("touchstart", (ev) => {
+  addRevertibleEventListener(draggablePart, "touchstart", (ev) => {
     if (!checkCurrentlyDraggable(draggablePart)) {
-      console.debug("Ignoring touch start on currently non-draggable ", draggablePart.outerHTML);
+      //console.debug("Ignoring touch start on currently non-draggable ", draggablePart.outerHTML);
       return ;
     }
-    console.debug(`Touch-start on '${elem.innerText}'`);
+    //console.debug('Touch-start on: ', elem);
     startDrag(elem);    
   });
-  draggablePart.addEventListener("touchmove", (ev) => {
+  addRevertibleEventListener(draggablePart, "touchmove", (ev) => {
     if (!draggablePart.classList.contains("dragging")) {
       return ;
     }
@@ -142,23 +176,23 @@ function addItemTouchEventListeners(elem, dropCallBack) {
     if (!elemUnderCursor) {
       return;
     }
-    console.debug(`Touch-move over ${elemUnderCursor.innerText}`);
+    //console.debug('Touch-move on ', elemUnderCursor);
     moveDragOver(elemUnderCursor);
   });
-  draggablePart.addEventListener("touchcancel", (ev) => {
+  addRevertibleEventListener(draggablePart, "touchcancel", (ev) => {
     if (!draggablePart.classList.contains("dragging")) {
       return;
     }
     ev.preventDefault();
-    console.debug(`Touch-cancel`);
+    //console.debug(`Touch-cancel`);
     endDrag(true, dropCallBack);
   });
-  draggablePart.addEventListener("touchend", (ev) => {
+  addRevertibleEventListener(draggablePart, "touchend", (ev) => {
     if (!draggablePart.classList.contains("dragging")) {
       return ;
     }
     //ev.preventDefault(); Not preventing since then no 'click' event will get generated
-    console.debug(`Touch-end`);
+    //console.debug(`Touch-end`);
     endDrag(false, dropCallBack);
   });
 }

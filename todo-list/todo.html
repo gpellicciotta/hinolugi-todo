@@ -13,8 +13,8 @@
     <link rel="manifest" href="/manifest.json">
     <link type="image/svg" rel="shortcut icon" href="todo-icon.svg">
     <link rel="stylesheet" href="todo.css">
-    <script defer src="todo.js"></script>
-    <script defer src="/tooltip.js"></script>
+    <script defer src="todo.mjs" type="module"></script>
+    <script defer src="../tooltip.js"></script>
     <script src="https://kit.fontawesome.com/1c60ca333d.js" crossorigin="anonymous"></script>
     <script src="/utils.js" defer></script>
   </head>
@@ -35,42 +35,51 @@
       </div>
       <ol id="todo-list">
         <li id="item-1" data-item-id="1" class="item">
-          <label data-action="toggle" data-item-id="1"><i class="fa-solid fa-check"></i></label>
-          <div class="item-content">
-            <span class="note">Create 'todo-list' project on github.</span>
-            <div class="tags">
-              <span class="created tag">2002-05-01 12:00:01</span>
-              <span class="last-modified tag">2002-05-01 12:00:01</span>
-            </div>
-          </div>
-          <button class="icon-button" data-action="delete" data-item-id="1" title="Delete"><i class="fa-solid fa-trash"></i></button>
+          <label class="item-status" data-action="toggle"><i class="fa-solid fa-check"></i></label>
+          <span class="item-text">Create 'todo-list' project on github.</span>
+          <span class="item-tags">
+            <span class="created tag">2002-05-01 12:00:01</span>
+            <span class="last-modified tag">2002-05-01 12:00:01</span>
+          </span>
+          <span class="item-actions">
+            <span draggable="true" title="Drag to move item"><i class="fas fa-grip-lines"></i></span>
+            <button class="icon-button" data-action="edit" title="Edit text"><i class="fa-solid fa-pen"></i></button>
+            <button class="icon-button" data-action="copy" title="Copy to clipboard"><i class="fa-solid fa-copy"></i></button>
+            <button class="icon-button" data-action="delete" title="Delete item"><i class="fa-solid fa-trash"></i></button>
+          </span>
         </li>
         <li id="item-2" data-item-id="2" class="item">
-          <label data-action="toggle" data-item-id="2"><i class="fa-solid fa-check"></i></label>
-          <div class="item-content">
-            <span class="note">Make it work.</span>
-            <div class="tags">
-              <span class="created tag">2002-05-01 12:00:01</span>
-              <span class="last-modified tag">2002-05-01 12:00:01</span>
-            </div>
-          </div>
-          <button class="icon-button" data-action="delete" data-item-id="2" title="Delete"><i class="fa-solid fa-trash"></i></button>
+          <label class="item-status" data-action="toggle"><i class="fa-solid fa-check"></i></label>
+          <span class="item-text">Make it work.</span>
+          <span class="tags">
+            <span class="created tag">2002-05-01 12:00:01</span>
+            <span class="last-modified tag">2002-05-01 12:00:01</span>
+          </span>
+          <span class="item-actions">
+            <span draggable="true" title="Drag to move item"><i class="fas fa-grip-lines"></i></span>
+            <button class="icon-button" data-action="edit" title="Edit text"><i class="fa-solid fa-pen"></i></button>
+            <button class="icon-button" data-action="copy" title="Copy to clipboard"><i class="fa-solid fa-copy"></i></button>
+            <button class="icon-button" data-action="delete" title="Delete item"><i class="fa-solid fa-trash"></i></button>
+          </span>
         </li>
         <li id="item-3" class="item" data-item-id="3">
-          <label data-action="toggle" data-item-id="3"><i class="fa-solid fa-check"></i></label>
-          <div class="item-content">
-            <span class="note">Publish it</span>
-            <div class="tags">
-              <span class="created tag">2002-05-01 12:00:01</span>
-              <span class="last-modified tag">2002-05-01 12:00:01</span>
-            </div>
-          </div>
-          <button class="icon-button" data-action="delete" data-item-id="3" title="Delete"><i class="fa-solid fa-trash"></i></button>
+          <label class="item-status" data-action="toggle"><i class="fa-solid fa-check"></i></label>
+          <span class="item-text">Create 'todo-list' project on github.</span>
+          <span class="tags">
+            <span class="created tag">2002-05-01 12:00:01</span>
+            <span class="last-modified tag">2002-05-01 12:00:01</span>
+          </span>
+          <span class="item-actions">
+            <span draggable="true" title="Drag to move item"><i class="fas fa-grip-lines"></i></span>
+            <button class="icon-button" data-action="edit" title="Edit text"><i class="fa-solid fa-pen"></i></button>
+            <button class="icon-button" data-action="copy" title="Copy to clipboard"><i class="fa-solid fa-copy"></i></button>
+            <button class="icon-button" data-action="delete" title="Delete item"><i class="fa-solid fa-trash"></i></button>
+          </span>
         </li>
       </ol>
     </main>
     <footer>
-      <p>Todo List v1.2.0</p>
+      <p>Todo List v2.0.0</p>
       <p>Copyright &copy; Giovanni Pellicciotta</p>
     </footer>
   </body>

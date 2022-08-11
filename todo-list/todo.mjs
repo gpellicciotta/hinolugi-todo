@@ -1,3 +1,5 @@
+import { makeReordable } from '../reorder.mjs';
+
 document.addEventListener('DOMContentLoaded', onDomReady);
 
 const EMPTY_STATE = '{ "max-item-id": 99, "items": [] }';
@@ -49,6 +51,7 @@ function onDomReady() {
   // Get todo-list + register 'click' action
   let todoList = document.getElementById("todo-list");
   todoList.addEventListener('click', onListClick);
+  document.body.addEventListener('click', onListClick);
 
   // Add items from storage
   loadFromStorage();
@@ -63,15 +66,55 @@ function onDomReady() {
 function onListClick(event) {
   let targetElement = event.target;
   let actionElement = targetElement.closest("[data-action]");
-  let liElement = targetElement.closest("li.item");
-  console.debug("Click on target: " + targetElement.outerHTML + " within list element " + liElement.outerHTML);
-  if (actionElement && (actionElement.dataset.action === 'delete')) {
-    event.stopPropagation();
-    deleteItem(+liElement.dataset.itemId);
+  let itemElement = targetElement.closest(".item");
+  if (actionElement && itemElement) {
+    //console.debug("Click on target: " + targetElement.outerHTML + " within list element " + itemElement.outerHTML);
+    if (actionElement && (actionElement.dataset.action === 'delete')) {
+      event.stopPropagation();
+      deleteItem(+itemElement.dataset.itemId);
+    }
+    else if (actionElement && (actionElement.dataset.action === 'toggle')) {
+      event.stopPropagation();
+      markItem(+itemElement.dataset.itemId);
+    }
+    else if (actionElement && (actionElement.dataset.action === 'edit')) {
+      event.stopPropagation();
+      makeItemEditable(+itemElement.dataset.itemId, itemElement);
+    }
+    else if (actionElement && (actionElement.dataset.action === 'copy')) {
+      event.stopPropagation();
+      const item = itemsById.get(+itemElement.dataset.itemId);
+      const msg = `[${item["status"]}] ${item["note"]}`;
+      if (!navigator.clipboard) {
+        // Clipboard API not available
+        console.error(`Clipboard not available to copy message: ${msg}`);
+      }
+      else {
+        navigator.clipboard.writeText(msg)
+          .then(() => {
+            console.info(`Copied to clipboard: ${msg}`);
+          })
+          .catch(err => {
+            console.error('Failed to copy to clipboard:', err);
+          })
+      }
+    }
   }
-  else if (actionElement && (actionElement.dataset.action === 'toggle')) {
-    event.stopPropagation();
-    markItem(+liElement.dataset.itemId);
+  else if (itemElement) {
+    if (!itemElement.classList.contains("selected")) {
+      // De-select any currently selected element
+      document.querySelectorAll(".item.selected").forEach(el => {
+        el.classList.remove("selected");
+      });
+      // Select the current one
+      itemElement.classList.add("selected");
+    }
+  }
+  else { // Click on container
+    // De-select any currently selected element
+    document.querySelectorAll(".item.selected").forEach(el => {
+      el.classList.remove("selected");
+    });
   }
 }
 
@@ -79,6 +122,7 @@ function createItemList() {
   let todoList = document.getElementById("todo-list");
   todoList.innerHTML = ''; // Empty
   items.forEach(addItemToList);
+  makeReordable(todoList, reorderToDoList);
 }
 
 const ISO_REGEX = /^(\d\d\d\d[-]\d\d[-]\d\d)[T](\d\d[:]\d\d[:]\d\d).*$/;
@@ -109,16 +153,19 @@ function addItemToList(item) {
     newLiItem.classList.add("done");
   }
   newLiItem.innerHTML = `
-    <label data-action="toggle" data-item-id="${item.id}"><i class="fa-solid fa-check"></i></label>
-    <div class="item-content">
-      <span data-action="edit" data-item-id="${item.id}" class="note">${item["note"]}</span>
-      <div class="tags">
-        <span class="status tag" data-action="toggle" data-item-id="${item.id}">${item["status"]}</span>
-        <span class="created tag">${dateTagFromIsoString(item["created-timestamp"])}</span>
-        <span class="last-modified tag">${dateTagFromIsoString(item["last-modified-timestamp"])}</span>
-      </div>
-    </div>
-    <button class="icon-button" data-action="delete" data-item-id="${item.id}" title="Delete"><i class="fa-solid fa-trash"></i></button>
+    <label class="item-status" data-action="toggle"><i class="fa-solid fa-check"></i></label>
+    <span class="item-text">${item["note"]}</span>
+    <span class="item-tags">
+      <span class="status tag" data-action="toggle">${item["status"]}</span>
+      <span class="created tag">${dateTagFromIsoString(item["created-timestamp"])}</span>
+      <span class="last-modified tag">${dateTagFromIsoString(item["last-modified-timestamp"])}</span>
+    </span>
+    <span class="item-actions">
+      <span draggable="true" title="Drag to move item"><i class="fas fa-grip-lines"></i></span>
+      <button class="icon-button" data-action="edit" title="Edit text"><i class="fa-solid fa-pen"></i></button>
+      <button class="icon-button" data-action="copy" title="Copy to clipboard"><i class="fa-solid fa-copy"></i></button>
+      <button class="icon-button" data-action="delete" title="Delete item"><i class="fa-solid fa-trash"></i></button>
+    </span>
   `;
   todoList.appendChild(newLiItem);
 }
@@ -139,9 +186,30 @@ function addNewItem(event) {
   itemsById.set(newItem.id, newItem);
   saveToStorage();
 
-  addItemToList(newItem, items.length - 1);  
+  addItemToList(newItem); 
   newItemInput.value = '';
   newItemInput.focus();
+
+  let todoList = document.getElementById("todo-list");
+  makeReordable(todoList, reorderToDoList);
+}
+
+function reorderToDoList() {
+  let reorderedItems = [];
+  let itemEls = document.getElementById("todo-list").children;
+  for (var i = 0; i < itemEls.length; i++) {
+    const itemEl = itemEls[i];
+    const itemId = +itemEl.dataset.itemId;
+    const item = itemsById.get(itemId);
+    if (!item) {
+      console.error("failed to determine new item order due to missing item for ID#" + itemId, itemEl);
+      return;
+    }
+    reorderedItems.push(item);
+  }
+  // Save
+  items = reorderedItems;
+  saveToStorage();
 }
 
 function indexOfItem(id) {  
@@ -151,6 +219,45 @@ function indexOfItem(id) {
     }
   }
   return -1;
+}
+
+function makeItemEditable(id, itemEl) {
+  console.info(`Trying to make item with id ${id} editable`);
+  let item = itemsById.get(id)
+  if (!item) {
+    console.error(`Cannot make item editable with invalid id ${id}`);
+    return ;
+  }
+  let itemTextEl = itemEl.querySelector(".item-text");
+  if (!itemTextEl) {
+    console.error(`Cannot find text element for:`, itemEl);
+    return;
+  }
+  let input = document.createElement("input");
+  input.setAttribute("type", "text");
+  input.value = item["note"];
+  const onInputChanged = (ev) => {
+    ev.stopPropagation();
+    if (input == null) { return; } // Already invoked
+    let newNote = input.value;
+    if (newNote !== item["note"]) {
+      console.debug(`Input has changed: (new) '${newNote}' <> (old) '${item["note"]}'`);
+      item["note"] = newNote;
+      saveToStorage();
+    }
+    input.remove();
+    itemTextEl.innerText = item["note"];
+  };
+  input.addEventListener("blur", onInputChanged);
+  input.addEventListener('keyup', (event) => {
+    if (event.key === 'Enter') {
+      input.blur();
+    }
+  });
+  itemTextEl.innerHTML = '';
+  itemTextEl.appendChild(input);
+  //console.debug("Input element created for editing");
+  input.focus();
 }
 
 function markItem(id) {

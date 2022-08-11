@@ -10,6 +10,8 @@ const STATIC_ASSETS = [
   '/utils.css',
   '/utils.js',
   '/tooltip.js',
+  './utils.mjs',
+  './reorder.mjs',
   '/hinolugi-utils-icon.svg',
   '/hinolugi-utils-icon-512x512.png',
   '/hinolugi-utils-icon-192x192.png',

@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+::placeholder {
+  opacity: 0.5;
+}
+
 body {
   display: grid;
   grid-template-rows: min-content 1fr;
@@ -31,6 +35,10 @@ body {
     grid-template-rows: min-content auto min-content;
     padding: 1rem;
   }
+}
+
+kbd {
+  font-family: 'Roboto Mono', 'Consolas', monospace;
 }
 
 h1 {
