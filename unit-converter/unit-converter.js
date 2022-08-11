@@ -33,6 +33,20 @@ const BUILTIN_CONVERSIONS = {
     "to-unit": "°C",
     "to-unit-description": "degrees Celsius",
     "conversion": (val) => { return (val - 32) * (5/9); }
+  },
+  "kilometers to miles": {
+    "from-unit": "km",
+    "from-unit-description": "SI kilometers",
+    "to-unit": "mi.",
+    "to-unit-description": "imperial miles",
+    "conversion": (val) => { return val / 1.609344; }
+  },
+  "miles to kilometers": {
+    "from-unit": "mi.",
+    "from-unit-description": "imperial miles",
+    "to-unit": "km",
+    "to-unit-description": "SI kilometers",
+    "conversion": (val) => { return val * 1.609344; }
   }
 };
 
