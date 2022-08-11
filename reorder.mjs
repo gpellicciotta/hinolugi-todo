@@ -1,52 +1,9 @@
-// See also: https://www.youtube.com/watch?v=wv7pvH1O5Ho
-
-window.addEventListener("load", domReady, false);
-
-function domReady() {
-  let horizontalEl = document.getElementById("horizontal");
-  let cntEl = document.getElementById("item-count");
-  let listEl = document.getElementById("item-list");
-  listEl.innerHTML = '';
-  addChangeEvent(cntEl, createList);
-  addChangeEvent(horizontalEl, layoutList);
-  createList();
-  layoutList();
-}
-
-function layoutList() {
-  let horizontalEl = document.getElementById("horizontal");
-  let listEl = document.getElementById("item-list");
-  if (horizontalEl.checked) {
-    listEl.classList.add("horizontal");
-  }
-  else {
-    listEl.classList.remove("horizontal");
-  }
-}
-
-function createList() {
-  let cntEl = document.getElementById("item-count");
-  let cnt = +cntEl.value;
-
-  let listEl = document.getElementById("item-list");
-  listEl.innerHTML = '';
-  for (let i = 0; i < cnt; i++) {
-    console.log("Adding new child");
-    listEl.appendChild(createItem(i + 1));
-  }
-
-  makeReordable(listEl);
-}
-
-function createItem(itemNum) {
-  let elem = document.createElement("li");
-  elem.setAttribute("id", `item-${itemNum}`);
-  //elem.setAttribute("draggable", "true");
-  elem.dataset.itemNum = itemNum;
-  elem.classList.add("item");
-  elem.innerHTML = `<span draggable="true"><i class="fas fa-grip-lines"></i></span><span class="item-text">List item #${itemNum}</span>`;
-  return elem;
-}
+// Utility for re-ordering the items in a container by dragging them around
+//
+// Requires a container with child elements that have a (descendent that has a) 'draggable'
+// attribute.
+// While dragging, the child element will get a CSS class of 'dragging'.
+//
 
 let dragState = {
   item: null,
@@ -77,15 +34,28 @@ function moveDragOver(overElem) {
   }
 }
 
-function endDrag(cancelled) {
+function endDrag(cancelled, dropCallBack) {
   if (cancelled) { // Cancel: reset to old position
     moveBefore(dragState.item.parentElement, dragState.item, dragState.nextItem);
   }
   dragState.item.classList.remove("dragging");
+  if (dropCallBack) {
+    dropCallBack(dragState.item);
+  } 
+  dragState = {
+    item: null,
+    nextItem: null,
+    dropped: false
+  };
 }
 
-function makeReordable(containerEl) {
-  console.log("Container", containerEl);
+/**
+ * Make a container's child elements re-ordeable by enabling dragging them into a new position.
+ * 
+ * @param containerEl The container that is expected to have child elements to be re-ordered by dragging.
+ * @param dropCallBack Function to be invoked when an element is dropped. The argument will be the element being dropped.
+ */
+export function makeReordable(containerEl, dropCallBack) {
   // Container events:
   containerEl.addEventListener("drop", () => { // Record successful drop (to make distinction from 'cancel'):
     console.debug(`Drag-drop on list`);
@@ -96,14 +66,14 @@ function makeReordable(containerEl) {
   });
   containerEl.addEventListener("dragend", () => { // Finish operation: cancel or finalize
     console.debug(`Drag-end on list`);
-    endDrag(!dragState.dropped)
+    endDrag(!dragState.dropped, dropCallBack)
   });
   // Child item events:
   let childEls = containerEl.children;
   for (let i = 0; i < childEls.length; i++) {
     let el = childEls.item(i);
     addItemDragEventListeners(el);
-    addItemTouchEventListeners(el); 
+    addItemTouchEventListeners(el, dropCallBack); 
   }
 }
 
@@ -122,40 +92,74 @@ function addItemDragEventListeners(elem) {
   return elem;
 }
 
-function addItemTouchEventListeners(elem) {
+function checkCurrentlyDraggable(elem) {
+  console.log("Checking", elem);
+  if (elem.hasAttribute("draggable")) {
+    //console.debug("display: ", window.getComputedStyle(elem).display);
+    //console.debug("visibility: ", window.getComputedStyle(elem).visibility);
+    return (window.getComputedStyle(elem).display !== 'none') &&
+           (window.getComputedStyle(elem).visibility !== 'hidden');
+  }
+  // If we get here: look for decendent element
+  let draggablePart = elem.querySelector("[draggable]");
+  if (!draggablePart) {
+    return false;
+  }
+  //console.debug("draggablePart display: ", window.getComputedStyle(draggablePart).display);
+  //console.debug("draggablePart visibility: ", window.getComputedStyle(draggablePart).visibility);
+  return (window.getComputedStyle(draggablePart).display !== 'none') && (window.getComputedStyle(draggablePart).visibility !== 'hidden');
+}
+
+function addItemTouchEventListeners(elem, dropCallBack) {
   let draggablePart = elem;
   if (!draggablePart) {
     console.error("No draggable part found in " + elem.outerHTML);
     return ;
   }
   draggablePart.addEventListener("touchstart", (ev) => {
+    if (!checkCurrentlyDraggable(draggablePart)) {
+      console.debug("Ignoring touch start on currently non-draggable ", draggablePart.outerHTML);
+      return ;
+    }
     console.debug(`Touch-start on '${elem.innerText}'`);
     startDrag(elem);    
   });
   draggablePart.addEventListener("touchmove", (ev) => {
+    if (!draggablePart.classList.contains("dragging")) {
+      return ;
+    }
     ev.preventDefault();
     let elemUnderCursor = document.elementFromPoint(ev.targetTouches[0].clientX, ev.targetTouches[0].clientY);
     if (!elemUnderCursor) {
       return ;
     }
-    if (elemUnderCursor.tagName !== 'li') {
-      elemUnderCursor = elemUnderCursor.closest('li.item');
-    }    
+    while (elemUnderCursor.parentElement && (elemUnderCursor.parentElement !== elem.parentElement)) {
+      elemUnderCursor = elemUnderCursor.parentElement;
+      if (elemUnderCursor === document.body) {
+        return ;
+      }
+    }
     if (!elemUnderCursor) {
-      return ;
+      return;
     }
     console.debug(`Touch-move over ${elemUnderCursor.innerText}`);
     moveDragOver(elemUnderCursor);
   });
   draggablePart.addEventListener("touchcancel", (ev) => {
+    if (!draggablePart.classList.contains("dragging")) {
+      return;
+    }
     ev.preventDefault();
     console.debug(`Touch-cancel`);
-    endDrag(true);
+    endDrag(true, dropCallBack);
   });
   draggablePart.addEventListener("touchend", (ev) => {
-    ev.preventDefault();
+    if (!draggablePart.classList.contains("dragging")) {
+      return ;
+    }
+    //ev.preventDefault(); Not preventing since then no 'click' event will get generated
     console.debug(`Touch-end`);
-    endDrag(false);
+    endDrag(false, dropCallBack);
   });
 }
 
@@ -190,9 +194,3 @@ function moveAfter(parent, elToMove, elToMoveAfter) {
     parent.appendChild(elToMove);
   }
 }
-
-function addChangeEvent(elem, changeFunc) {
-  elem.addEventListener("change", changeFunc);
-  elem.addEventListener("keyup", changeFunc);
-  elem.addEventListener("paste", changeFunc);
-} 

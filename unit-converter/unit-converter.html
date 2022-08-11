@@ -13,7 +13,7 @@
     <link rel="manifest" href="/manifest.json">
     <link type="image/svg" rel="shortcut icon" href="unit-converter-icon.svg">
     <link rel="stylesheet" href="unit-converter.css">
-    <script defer src="unit-converter.js"></script>
+    <script defer src="unit-converter.mjs" type="module"></script>
     <script defer src="/tooltip.js"></script>
     <script src="https://kit.fontawesome.com/1c60ca333d.js" crossorigin="anonymous"></script>
     <script src="/utils.js" defer></script>
@@ -27,25 +27,33 @@
       <div id="controls">
         <input id="amount" name="amount" type="number" placeholder="Amount to convert">
       </div>
-      <div id="output">
-        <table id="conversions">
-          <tr>
-            <td class="from-value">33.00</td>
-            <td class="from-unit" title="Kuna">HRK</td>
-            <td class="equal-sign">=</td>
-            <td class="to-value">4.39</td>
-            <td class="to-unit" title="Euro">€</td>
-            <td class="actions"><button class="icon-button" data-action="delete" data-item-id="2" title="Delete"><i class="fa-solid fa-trash"></i></button></td>
-          </tr>
-          <tr>
-            <td class="from-value">33.00</td>
-            <td class="from-unit" title="Euro">€</td>
-            <td class="equal-sign">=</td>
-            <td class="to-value">248.14</td>
-            <td class="to-unit" title="Kuna">HRK</td>
-            <td class="actions"><button class="icon-button" data-action="delete" data-item-id="2" title="Delete"><i class="fa-solid fa-trash"></i></button></td>
-          </tr>
-        </table>
+      <div id="conversions">
+        <div class="conversion">
+          <span class="conversion-title">From Kuna to Euro</span>
+          <span class="from-value">33.00</span>
+          <span class="from-unit" title="Kuna">HRK</span>
+          <span class="equal-sign">=</span>
+          <span class="to-value">4.39</span>
+          <span class="to-unit" title="Euro">€</span>
+          <span class="actions">
+            <span draggable="true" title="Drag to move item"><i class="fas fa-grip-lines"></i></span>
+            <button class="icon-button" data-action="copy" title="Copy to clipboard"><i class="fa-solid fa-copy"></i></button>
+            <button class="icon-button" data-action="delete" title="Delete conversion"><i class="fa-solid fa-trash"></i></button>
+          </span>
+        </div>
+        <div class="conversion">
+          <span class="conversion-title">From Euro to Kuna</span>
+          <span class="from-value">33.00</span>
+          <span class="from-unit" title="Euro">€</span>
+          <span class="equal-sign">=</span>
+          <span class="to-value">248.14</span>
+          <span class="to-unit" title="Kuna">HRK</span>
+          <span class="actions">
+            <span draggable="true" title="Drag to move item"><i class="fas fa-grip-lines"></i></span>
+            <button class="icon-button" data-action="copy" title="Copy to clipboard"><i class="fa-solid fa-copy"></i></button>    
+            <button class="icon-button" data-action="delete" title="Delete conversion"><i class="fa-solid fa-trash"></i></button>
+          </span>
+        </div>
       </div>
       <div id="add-controls">
         <datalist id="available-conversions">
@@ -53,12 +61,12 @@
           <option value="euro to kuna"></option>
           <option value="fahrenheit to celsius"></option>
         </datalist>
-        <input id="select-conversion-input" list="available-conversions" placeholder="Conversion to show"></input>
+        <input id="select-conversion-input" list="available-conversions" placeholder="Conversion to add"></input>
         <button id="add-button" class="icon-button" data-action="add" title="Add Conversion"><i class="fa-solid fa-plus"></i></button>
       </div>
     </main>
     <footer>
-      <p>Unit Converter v1.6.0</p>
+      <p>Unit Converter v2.0.0</p>
       <p>Copyright &copy; Giovanni Pellicciotta</p>
     </footer>
   </body>

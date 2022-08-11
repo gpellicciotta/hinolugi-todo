@@ -12,7 +12,8 @@ const STATIC_ASSETS = [
   '/tooltip.js',
   '/hinolugi-utils-icon.svg',
   '/hinolugi-utils-icon-512x512.png',
-  '/hinolugi-utils-icon-96x96.png',
+  '/hinolugi-utils-icon-192x192.png',
+  '/hinolugi-utils-icon-512x512.png',
 
   // Shared assets:
   'https://www.pellicciotta.com/hinolugi-support.js/img/hinolugi-icon.svg',
@@ -27,6 +28,8 @@ const STATIC_ASSETS = [
   '/unit-converter/unit-converter.css',
   '/unit-converter/unit-converter.js',
   '/unit-converter/unit-converter-icon-96x96.png',
+  '/unit-converter/unit-converter-icon-192x192.png',
+  '/unit-converter/unit-converter-icon-512x512.png',
   '/unit-converter/unit-converter-icon.svg',
 
   // Todo list:
@@ -34,6 +37,8 @@ const STATIC_ASSETS = [
   '/todo-list/todo.css',
   '/todo-list/todo.js',
   '/todo-list/todo-icon-96x96.png',
+  '/todo-list/todo-icon-192x192.png',
+  '/todo-list/todo-icon-512x512.png',
   '/todo-list/todo-icon.svg',
 
   // Morse code:
@@ -41,6 +46,8 @@ const STATIC_ASSETS = [
   '/morse/morse.css',
   '/morse/morse.js',
   '/morse/morse-icon-96x96.png',
+  '/morse/morse-icon-192x192.png',
+  '/morse/morse-icon-512x512.png',
   '/morse/morse-icon.svg',
 
   // Reordering:
