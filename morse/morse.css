@@ -70,7 +70,7 @@ button:active {
 }
 
 button.disabled {
-  background-color: #cecece;
+  background-color: #3e3e3e;
   color: #7e7e7e;
   border: 1px solid #7e7e7e;
 }

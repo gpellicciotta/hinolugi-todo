@@ -1,9 +1,9 @@
 {
   "short_name": "HiNoLuGi Utils",
   "name": "HiNoLuGi Utils",
-  "version": "1.10.0",
+  "version": "1.15.0",
   "id": "hinolugi-utils",
-  "description": "Small utilities and tools",
+  "description": "A set of online utilities and tools.",
   "scope": "/",
   "start_url": "/",
   "background_color": "#cecece",
