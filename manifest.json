@@ -1,7 +1,7 @@
 {
   "short_name": "HiNoLuGi Utils",
   "name": "HiNoLuGi Utils",
-  "version": "1.23.0",
+  "version": "1.25.0",
   "id": "hinolugi-utils",
   "description": "A set of online utilities and tools.",
   "scope": "/",
@@ -10,10 +10,6 @@
   "theme_color": "#3e3e3e",
   "display": "standalone",
   "shortcuts": [
-    { "name": "Test 1", "url": "/todo-list/todo.html" },
-    { "name": "Test 2", "url": "./todo-list/todo.html" },
-    { "name": "Test 3", "url": "?todo.html" },
-    { "name": "Test 4", "url": "#todo-list" },
     {
       "name": "ToDo List",
       "url": "/todo-list/todo.html",
@@ -67,6 +63,25 @@
         },
         {
           "src": "/unit-converter/unit-converter-icon.svg",
+          "sizes": "512x512"
+        }
+      ]
+    },
+    {
+      "name": "Run Training",
+      "url": "/run-training/run-training.html",
+      "description": "Keep track of a specific run-training",
+      "icons": [
+        {
+          "src": "/run-training/run-training-icon-512x512.png",
+          "sizes": "512x512"
+        },
+        {
+          "src": "/run-training/run-training-icon-96x96.png",
+          "sizes": "96x96"
+        },
+        {
+          "src": "/run-training/run-training-icon.svg",
           "sizes": "512x512"
         }
       ]
