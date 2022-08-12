@@ -1,18 +1,18 @@
 {
   "short_name": "HiNoLuGi Utils",
   "name": "HiNoLuGi Utils",
-  "version": "1.22.0",
+  "version": "1.23.0",
   "id": "hinolugi-utils",
   "description": "A set of online utilities and tools.",
   "scope": "/",
-  "start_url": "https://utils.pellicciotta.com",
+  "start_url": "/",
   "background_color": "#cecece",
   "theme_color": "#3e3e3e",
   "display": "standalone",
   "shortcuts": [
     { "name": "Test 1", "url": "/todo-list/todo.html" },
-    { "name": "Test 2", "url": "todo-list/todo.html" },
-    { "name": "Test 3", "url": "https://utils.pellicciotta.com/todo-list/todo.html" },
+    { "name": "Test 2", "url": "./todo-list/todo.html" },
+    { "name": "Test 3", "url": "?todo.html" },
     { "name": "Test 4", "url": "#todo-list" },
     {
       "name": "ToDo List",
