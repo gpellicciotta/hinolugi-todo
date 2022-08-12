@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   fill="#000000"
+   viewBox="0 0 32 32"
+   width="512px"
+   height="512px"
+   version="1.1"
+   id="svg15"
+   sodipodi:docname="run-training-icon.svg"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   inkscape:export-filename="run-training-512x512.png"
+   inkscape:export-xdpi="18"
+   inkscape:export-ydpi="18"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs19" />
+  <sodipodi:namedview
+     id="namedview17"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="0.48735144"
+     inkscape:cx="4.1038147"
+     inkscape:cy="347.7983"
+     inkscape:window-width="1920"
+     inkscape:window-height="1013"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg15" />
+  <g
+     class="layer"
+     id="hexagon-shape"
+     style="fill:#3e3e3e;fill-opacity:1;fill-rule:nonzero"
+     transform="matrix(1.2345201,0,0,1.1905221,-3.340441,-2.6995663)">
+    <title
+       id="hexagon-title">Hexagon</title>
+    <!-- Outer path is white so that a dark line still contrasts against a dark background -->
+    <path
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:2.4;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 15.816032,3.5634033 c -1.626094,0 -9.6095778,4.6431084 -10.4180317,6.0602823 -0.8084541,1.4171744 -0.8084541,10.7033894 0,12.1205654 0.8084539,1.417173 8.7919377,6.060282 10.4180317,6.060282 1.616908,0 9.600391,-4.643109 10.418032,-6.060282 0.808454,-1.417176 0.808454,-10.712715 0,-12.1205654 v 0 C 25.407235,8.2065117 17.43294,3.5634033 15.816032,3.5634033 Z"
+       id="hexagon-shape-outer-path" />
+    <!-- Inner path is the actual 'hexagonal border' around the icon/text -->
+    <path
+       style="fill:#000000;fill-opacity:0;fill-rule:nonzero;stroke:#3e3e3e;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 15.816032,3.5634033 c -1.626094,0 -9.6095778,4.6431084 -10.4180317,6.0602823 -0.8084541,1.4171744 -0.8084541,10.7033894 0,12.1205654 0.8084539,1.417173 8.7919377,6.060282 10.4180317,6.060282 1.616908,0 9.600391,-4.643109 10.418032,-6.060282 0.808454,-1.417176 0.808454,-10.712715 0,-12.1205654 v 0 C 25.407235,8.2065117 17.43294,3.5634033 15.816032,3.5634033 Z"
+       id="hexagon-shape-inner-path" />
+  </g>
+  <g
+     class="layer"
+     id="runner-shape"
+     style="fill:#3e3e3e;fill-opacity:1;fill-rule:nonzero"
+     transform="matrix(0.04330395,0,0,0.03697832,6.4582869,6.2643725)">
+    <path
+       d="m 400,224 h -44 l -26.12,-53.25 c -12.5,-25.5 -35.38,-44.25 -61.75,-51 L 197,98.63 c -7.5,-1.79 -15.9,-2.66 -22.5,-2.66 -20.88,0 -41.33,6.81 -58.26,19.78 L 76.5,146.3 c -8.19,6.2 -12.49,15.7 -12.49,25.3 0,17.11 13.67,32.02 32.02,32.02 6.808,0 13.67,-2.158 19.47,-6.616 l 39.63,-30.38 c 5.92,-4.488 13.01,-6.787 19.53,-6.787 2.017,0 3.981,0.2196 5.841,0.6623 l 14.62,4.25 -37.5,87.5 C 154.1,260.3 152.5,268.8 152.5,277.2 c 0,22.09 11.49,43.52 31.51,55.29 l 85,50.13 -27.5,87.75 c -0.9875,3.174 -1.458,6.388 -1.458,9.55 0,13.65 8.757,26.31 22.46,30.58 3.088,1 6.388,1.5 9.488,1.5 13.62,0 26.25,-8.75 30.5,-22.5 l 31.75,-101 c 1.211,-4.278 1.796,-8.625 1.796,-12.93 0,-16.57 -8.661,-32.51 -23.55,-41.44 l -61.13,-36.12 31.25,-78.38 20.25,41.5 C 310.9,277.4 327.9,288 345.1,288 H 400 c 17.62,0 32,-14.38 32,-32 0,-17.7 -14.4,-32 -32,-32 z M 288,96 c 26.5,0 48,-21.5 48,-48 0,-26.5 -21.5,-48 -48,-48 -26.5,0 -48,21.5 -48,48 0,26.5 21.5,48 48,48 z M 129.8,317.5 114.9,352 H 48 c -17.62,0 -32,14.38 -32,32 0,17.62 14.38,32 32,32 h 77.5 c 19.25,0 36.5,-11.5 44,-29.12 l 8.875,-20.5 -10.75,-6.25 C 150.4,349.9 137.6,334.8 129.8,317.5 Z"
+       id="path435" />
+  </g>
+</svg>
