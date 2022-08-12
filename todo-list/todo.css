@@ -17,20 +17,32 @@ main {
   margin-right: auto;
 
   display: grid;
-  grid-template-rows: min-content auto min-content;
+  grid-template-areas: "todo-list"
+                       "controls";
+  grid-template-rows: auto min-content;
   grid-template-columns: 1fr;
+  gap: 2rem;
   justify-items: center;
   justify-content: center;
   align-items: flex-start;
 }
 
+@media (hover: hover) {
+  main {
+    grid-template-areas: "controls"
+                         "todo-list";
+    grid-template-rows: min-content auto;
+  }
+}
+
 #controls {
+  grid-area: controls;
   width: 100%;
   display: grid;
-  grid-template-columns: 5rem auto 5rem;
+  grid-template-columns: auto min-content;
   justify-content: stretch;
   align-items: stretch;
-  margin-bottom: 2rem;
+  gap: 1rem;
 }
 
 #controls > input {
@@ -43,6 +55,7 @@ main {
 }
 
 #todo-list {
+  grid-area: todo-list;
   width: 100%;
   display: flex;
   flex-direction: column;
