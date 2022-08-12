@@ -1,11 +1,11 @@
 {
   "short_name": "HiNoLuGi Utils",
   "name": "HiNoLuGi Utils",
-  "version": "1.18.0",
+  "version": "1.20.0",
   "id": "hinolugi-utils",
   "description": "A set of online utilities and tools.",
   "scope": "/",
-  "start_url": "/",
+  "start_url": "https://utils.pellicciotta.com",
   "background_color": "#cecece",
   "theme_color": "#3e3e3e",
   "display": "standalone",
