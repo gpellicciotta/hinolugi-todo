@@ -103,6 +103,69 @@ main > p {
   text-align: center;
 }
 
+#tool-list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 10rem);
+  grid-template-rows: repeat(auto-fit, 10rem);
+  gap: 1rem;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+}
+
+#tool-list .tool {
+  display: grid;
+  grid-template-areas: "tool-name"
+                       "tool-icon"
+                       "tool-description";
+  grid-template-rows: 1fr 2fr 1fr;   
+  justify-items: center;
+  align-items: start;
+  background-color: white;                 
+  min-width: 5rem;
+  max-width: 20rem;
+  width: 10rem;
+  height: 10rem;
+  gap: 0.5rem;
+  text-align: center;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.35);
+}
+
+.tool-name {
+  width: 100%;
+  grid-area: tool-name;
+  background-color: #3e3e3e;
+  color: #cecece;
+  padding: 0.5rem;
+}
+
+.tool:hover > .tool-name{
+  color: white;
+}
+
+.tool-icon {
+  grid-area: tool-icon;
+  max-width: 4rem;
+  color: red;
+  stroke: yellow;
+  fill: purple;
+}
+
+.tool:hover > .tool-icon {
+  animation: tilt-shaking 1s infinite;
+}
+
+.tool-description {
+  grid-area: tool-description;
+  padding: 0.5rem;
+  color: #3e3e3e;
+}
+
+.tool:hover > .tool-description {
+  color: var(--blue-hex);
+}
+
 table {
   width: 100%;
   min-width: 20rem;

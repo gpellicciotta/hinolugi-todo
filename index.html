@@ -20,14 +20,38 @@
       <p class="app-description">A small set of online utilities and tools.</p>
     </header>
     <main>
-      <table>
-        <tr><th>Name</th><th>Short Description</th></tr>
-        <tr><td><a href="morse/morse.html">Morse</a></td><td>Translate morse code</td></tr>
-        <tr><td><a href="box-shadow/box-shadow.html">CSS box-shadow creator</a></td><td>Interactively create CSS box-shadow properties</td></tr>
-        <tr><td><a href="reordering/reordering.html">Javascript-based list reordering test</a></td><td>Interactively create a list and then try re-ordering</td></tr>
-        <tr><td><a href="todo-list/todo.html">ToDo List</a></td><td>A simple todo-list for short-term use</td></tr>
-        <tr><td><a href="unit-converter/unit-converter.html">Unit Converter</a></td><td>A simple unit converter</td></tr>
-      </table>
+      <div id="tool-list">
+        <a class="tool" href="unit-converter/unit-converter.html">
+          <span class="tool-name">Unit Converter</span>
+          <span class="tool-description">A simple unit converter</span>
+          <img class="tool-icon" src="./unit-converter/unit-converter-icon.svg">
+        </a>
+        <a class="tool" href="todo-list/todo.html">
+          <span class="tool-name">ToDo List</span>
+          <span class="tool-description">A simple todo-list for short-term use</span>
+          <img class="tool-icon" src="./todo-list/todo-icon.svg">
+        </a>
+        <a class="tool" href="morse/morse.html">
+          <span class="tool-name">Morse Translator</span>
+          <span class="tool-description">Morse code to text, or vice versa</span>
+          <img class="tool-icon" src="./morse/morse-icon.svg">
+        </a>
+        <a class="tool" href="reordering/reordering.html">
+          <span class="tool-name">List Reordering</span>
+          <span class="tool-description">Javascript-based list reordering test</span>
+          <img class="tool-icon" src="./hinolugi-utils-icon.svg">
+        </a>
+        <a class="tool" href="box-shadow/box-shadow.html">
+          <span class="tool-name">CSS Box Shadow</span>
+          <span class="tool-description">CSS box-shadow creator</span>
+          <img class="tool-icon" src="./hinolugi-utils-icon.svg">
+        </a>
+        <a class="tool" href="run-training/run-training.html">
+          <span class="tool-name">Run training</span>
+          <span class="tool-description">Run training schedule and status</span>
+          <img class="tool-icon" src="./run-training/run-training-icon.svg">
+        </a>
+      </div>
     </main>
     <footer>
       <p><span class="app-name">HiNoLuGi Utils</span> <span class="app-version">v1.12.0</span></p>
