@@ -1,7 +1,7 @@
 // Service-worker for back-ground caching and processing.
 // Must be put in root, otherwise it won't work
 
-const CACHE_VERSION = 'hinolugi-utils@v6'; // Update to force deleting any old cache and starting a new
+const CACHE_VERSION = 'hinolugi-utils@v1.22.0'; // Update to force deleting any old cache and starting a new
 
 const STATIC_ASSETS = [
   // Base assets:
