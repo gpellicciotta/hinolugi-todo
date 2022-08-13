@@ -11,11 +11,17 @@ A simple todo list, using the browser's local storage to have some form of persi
 - Enables offline install.
 - Allows re-ordering the todo items.
 
+### 2.1.0
+- Ensure datetime tags are shorter + updated regularly
+- Confirm deletion of items
+- Ensure new items are added at the top of the list
+
 ### Roadmap for Next Major Version
 - Allow multiple named lists
 - Allow triggering an event when an item gets checked
-- Also still ensure datetime tags are shorter + synchronize every ... minute/hour ?
+
 
 ## See also
   - https://dev.to/k_tsushima/item-re-order-by-drag-and-drop-written-in-vanilla-javascript-331h
-  
+  - https://timeago.yarp.com/
+  - https://codepen.io/sdthornton/pen/wBZdXq

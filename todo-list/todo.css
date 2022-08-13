@@ -76,19 +76,39 @@ main {
                        "item-status item-text"
                        "item-status item-tags";
   padding-bottom: 0.5rem;
-  grid-template-columns: 2rem auto;
+  grid-template-columns: 2.5rem auto;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.item:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.item.done {
+  background-color: rgba(var(--green-components), 20%);
 }
 
 .item-status {
   grid-area: item-status;
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.item.done .item-status {
+  color: #3e3e3e;
 }
 
 .item-text {
   grid-area: item-text;
+  padding-right: 0.5rem;
+  padding-top: 0.5rem;
 }
 
 .item-tags {
   grid-area: item-tags;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 .item > * {
@@ -219,6 +239,12 @@ button.disabled {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
+}
+
+.item.done .tag {
+  border: 1px solid var(--green-hex);
+  color: white;
+  background-color: var(--green-hex);
 }
 
 .tag.status {

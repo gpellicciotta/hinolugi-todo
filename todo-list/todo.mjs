@@ -61,6 +61,19 @@ function onDomReady() {
 
   // Ensure input has focus
   newItemInput.focus();
+
+  // Update relative timestamps
+  setTimeout(updateRelativeTimestamps, 15000);
+}
+
+function updateRelativeTimestamps() {
+  document.querySelectorAll(".relative-time[data-timestamp]").forEach((relativeTimeEl) => {
+    const newRelativeTimeText = dateTagFromIsoString(relativeTimeEl.dataset.timestamp);
+    if (newRelativeTimeText !== relativeTimeEl.innerText) {
+      relativeTimeEl.innerText = newRelativeTimeText;
+    }
+  });
+  setTimeout(updateRelativeTimestamps, 15000);
 }
 
 function onListClick(event) {
@@ -121,28 +134,11 @@ function onListClick(event) {
 function createItemList() {
   let todoList = document.getElementById("todo-list");
   todoList.innerHTML = ''; // Empty
-  items.forEach(addItemToList);
+  items.forEach((item) => { addItemToList(item, false); } );
   makeReordable(todoList, reorderToDoList);
 }
 
-const ISO_REGEX = /^(\d\d\d\d[-]\d\d[-]\d\d)[T](\d\d[:]\d\d[:]\d\d).*$/;
-const SECONDS_IN_HOUR = 60 * 60;
-const SECONDS_IN_DAY = SECONDS_IN_HOUR * 24;
-
-function dateTagFromIsoString(isoString) {
-  let now = new Date();
-  let d = new Date(isoString);
-  let secondsDiff = Math.floor((now.getTime() - d.getTime()) / 1000);
-  let nowISO = now.toISOString();
-  let m1 = ISO_REGEX.exec(nowISO); 
-  let m2 = ISO_REGEX.exec(isoString);
-  if (m1[1] === m2[1]) { // Same day: only show time
-    return m1[2];
-  }
-  return m2[1];
-}
-
-function addItemToList(item) {
+function addItemToList(item, isNewItem) {
   let todoList = document.getElementById("todo-list");
 
   let newLiItem = document.createElement("li");
@@ -157,8 +153,8 @@ function addItemToList(item) {
     <span class="item-text">${item["note"]}</span>
     <span class="item-tags">
       <span class="status tag" data-action="toggle">${item["status"]}</span>
-      <span class="created tag">${dateTagFromIsoString(item["created-timestamp"])}</span>
-      <span class="last-modified tag">${dateTagFromIsoString(item["last-modified-timestamp"])}</span>
+      <span class="created tag relative-time" data-timestamp="${item["created-timestamp"]}">${dateTagFromIsoString(item["created-timestamp"])}</span>
+      <span class="last-modified tag relative-time" data-timestamp="${item["last-modified-timestamp"]}">${dateTagFromIsoString(item["last-modified-timestamp"])}</span>
     </span>
     <span draggable="true" class="item-actions">
       <span class="icon-button" title="Drag to move item"><i class="fas fa-grip-lines"></i></span>
@@ -167,7 +163,92 @@ function addItemToList(item) {
       <button class="icon-button" data-action="delete" title="Delete item"><i class="fa-solid fa-trash"></i></button>
     </span>
   `;
-  todoList.prepend(newLiItem);
+  if (isNewItem) {
+    todoList.prepend(newLiItem);
+  }
+  else {
+    todoList.appendChild(newLiItem);
+  }
+}
+
+function getDateParts(date) {
+  return {
+    'year': date.getFullYear(),
+    'month': (1 + date.getMonth()),
+    'day': date.getDate(),
+    'hour': date.getHours(),
+    'minute': date.getMinutes(),
+    'second': date.getSeconds(),
+    'millis': date.getMilliseconds(),
+    'timezone-offset': date.getTimezoneOffset()
+  }
+}
+
+function areOnSameDay(date1, date2) {
+  const date1Parts = getDateParts(date1);
+  const date2Parts = getDateParts(date2);
+  return (date1Parts.year === date2Parts.year) && (date1Parts.month === date2Parts.month) && (date1Parts.day === date2Parts.day);
+}
+
+function areOnSameHour(date1, date2) {
+  const date1Parts = getDateParts(date1);
+  const date2Parts = getDateParts(date2);
+  return (date1Parts.year === date2Parts.year) && (date1Parts.month === date2Parts.month) && (date1Parts.day === date2Parts.day) && (date1Parts.hour === date2Parts.hour);
+}
+
+function areOnSameMinute(date1, date2) {
+  const date1Parts = getDateParts(date1);
+  const date2Parts = getDateParts(date2);
+  return (date1Parts.year === date2Parts.year) && (date1Parts.month === date2Parts.month) && (date1Parts.day === date2Parts.day) && (date1Parts.hour === date2Parts.hour) && (date1Parts.minute === date2Parts.minute);
+}
+
+function localTimeString(date) {
+  const dateParts = getDateParts(date);
+  return `${dateParts.year}-${formatNumber(dateParts.month, 2)}-${formatNumber(dateParts.day, 2)} ${formatNumber(dateParts.hour, 2)}:${formatNumber(dateParts.minute, 2)}`;
+}
+
+function relativeLocalTimeString(date) {
+  const dateMillisSinceEpoch = date.getTime();
+  const dateParts = getDateParts(date);
+  const now = new Date();
+  const nowParts = getDateParts(now);
+  const nowMillisSinceEpoch = now.getTime(); 
+  const secondsDiff = Math.floor(Math.abs(nowMillisSinceEpoch - dateMillisSinceEpoch) / 1000);
+  if ((dateParts.year === nowParts.year) && (dateParts.month === nowParts.month) && (dateParts.day === nowParts.day)) { // Same day
+    if (dateParts.hour === nowParts.hour) { // Same hour
+      if (dateParts.minute === nowParts.minute) { // Same minute
+        if (secondsDiff) {
+          return `${secondsDiff}s ago`;
+        }
+        else {
+          return 'just now';
+        }
+      }
+      else {
+        const minutesDiff = Math.floor(secondsDiff / 60);
+        if (minutesDiff <= 1) {
+          return '1 minute ago';
+        }
+        else {
+          return `${minutesDiff} minutes ago`;
+        }
+      }
+    }
+    else { // Same day
+      return `${dateParts.hour}:${formatNumber(dateParts.minute, 2)}`;
+    }
+  }
+  // Not same day:
+  return `${dateParts.year}-${formatNumber(dateParts.month, 2)}-${formatNumber(dateParts.day, 2)}`;
+}
+
+function formatNumber(num, size) {
+  return String(num).padStart(size, '0');
+}
+
+function dateTagFromIsoString(isoString) {
+  let d = new Date(isoString);
+  return relativeLocalTimeString(d);
 }
 
 function addNewItem(event) {
@@ -190,7 +271,7 @@ function addNewItem(event) {
   itemsById.set(newItem.id, newItem);
   saveToStorage();
 
-  addItemToList(newItem); 
+  addItemToList(newItem, true); 
   newItemInput.value = '';
   newItemInput.focus();
 
@@ -250,10 +331,18 @@ function makeItemEditable(id, itemEl) {
     if (newNote && (newNote !== item["note"])) {
       console.debug(`Input has changed: (new) '${newNote}' <> (old) '${item["note"]}'`);
       item["note"] = newNote;
+      item["last-modified-timestamp"] = new Date().toISOString(); 
       saveToStorage();
     }
     input.remove();
     itemTextEl.innerText = item["note"];
+    let lastModifiedEl = itemEl.querySelector(".tag.last-modified");
+    if (!lastModifiedEl) {
+      console.error(`Cannot find last-modified child tag element for item with id ${id}`);
+      return;
+    }
+    lastModifiedEl.dataset.timestamp = item["last-modified-timestamp"];
+    lastModifiedEl.innerText = dateTagFromIsoString(item["last-modified-timestamp"]);
   };
   input.addEventListener("blur", onInputChanged);
   input.addEventListener('keyup', (event) => {
@@ -295,12 +384,23 @@ function markItem(id) {
   else {
     itemEl.classList.remove("done");
   }
+  let statusTagEl = itemEl.querySelector(".tag.status");
+  if (!statusTagEl) {
+    console.error(`Cannot find status tag child tag element for item with id ${id}`);
+    return;
+  }
+  statusTagEl.innerText = item["status"];
   let lastModifiedEl = itemEl.querySelector(".tag.last-modified");
   if (!lastModifiedEl) {
     console.error(`Cannot find last-modified child tag element for item with id ${id}`);
     return;
   }
+  lastModifiedEl.dataset.timestamp = item["last-modified-timestamp"];
   lastModifiedEl.innerText = dateTagFromIsoString(item["last-modified-timestamp"]);
+}
+
+function confirmDelete(title, text) {
+  return confirm(text);
 }
 
 function deleteItem(id) {
@@ -309,6 +409,11 @@ function deleteItem(id) {
   if (idx < 0) {
     console.error(`Cannot delete item with invalid id ${id}`);
     return;
+  }
+  let itemToDelete = items[idx];
+  // Ask confirmation
+  if (!confirmDelete('Confirm Delete', `Are you sure you want to delete the todo item '${itemToDelete["note"]}'?`)) {
+    return ;
   }
   // Update model:
   items.splice(idx, 1);
