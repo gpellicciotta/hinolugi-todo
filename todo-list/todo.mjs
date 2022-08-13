@@ -167,12 +167,16 @@ function addItemToList(item) {
       <button class="icon-button" data-action="delete" title="Delete item"><i class="fa-solid fa-trash"></i></button>
     </span>
   `;
-  todoList.appendChild(newLiItem);
+  todoList.prepend(newLiItem);
 }
 
 function addNewItem(event) {
   let newItemInput = document.getElementById("new-item");
-  let itemText = newItemInput.value;
+  let itemText = (newItemInput.value || '').trim();
+  if (!itemText) {
+    console.warn("Cannot add todo-item with no text");
+    return ;
+  }
   let itemId = (++maxItemId);
   let creationDate = new Date();
   let newItem = {
@@ -182,7 +186,7 @@ function addNewItem(event) {
     "created-timestamp": creationDate.toISOString(),
     "last-modified-timestamp": creationDate.toISOString(),
   };
-  items.push(newItem);
+  items.unshift(newItem); // = add to beginning
   itemsById.set(newItem.id, newItem);
   saveToStorage();
 
@@ -239,8 +243,11 @@ function makeItemEditable(id, itemEl) {
   const onInputChanged = (ev) => {
     ev.stopPropagation();
     if (input == null) { return; } // Already invoked
-    let newNote = input.value;
-    if (newNote !== item["note"]) {
+    let newNote = (input.value || '').trim();
+    if (!newNote) {
+      console.warn("Cannot change note to empty text: delete the item if that is what is desired");
+    }
+    if (newNote && (newNote !== item["note"])) {
       console.debug(`Input has changed: (new) '${newNote}' <> (old) '${item["note"]}'`);
       item["note"] = newNote;
       saveToStorage();
