@@ -160,8 +160,8 @@ function addItemToList(item) {
       <span class="created tag">${dateTagFromIsoString(item["created-timestamp"])}</span>
       <span class="last-modified tag">${dateTagFromIsoString(item["last-modified-timestamp"])}</span>
     </span>
-    <span class="item-actions">
-      <span draggable="true" title="Drag to move item"><i class="fas fa-grip-lines"></i></span>
+    <span draggable="true" class="item-actions">
+      <span class="icon-button" title="Drag to move item"><i class="fas fa-grip-lines"></i></span>
       <button class="icon-button" data-action="edit" title="Edit text"><i class="fa-solid fa-pen"></i></button>
       <button class="icon-button" data-action="copy" title="Copy to clipboard"><i class="fa-solid fa-copy"></i></button>
       <button class="icon-button" data-action="delete" title="Delete item"><i class="fa-solid fa-trash"></i></button>

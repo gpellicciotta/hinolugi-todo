@@ -279,7 +279,7 @@ li.item.done .tag.status {
   z-index: 100;
 }
 
-.item-actions>*[draggable] {
+.item-actions > * {
   color: white;
 }
 

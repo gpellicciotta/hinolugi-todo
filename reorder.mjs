@@ -134,11 +134,12 @@ function checkCurrentlyDraggable(elem) {
     return (window.getComputedStyle(elem).display !== 'none') &&
            (window.getComputedStyle(elem).visibility !== 'hidden');
   }
-  // If we get here: look for decendent element
+  // If we get here: look for descendent element
   let draggablePart = elem.querySelector("[draggable]");
   if (!draggablePart) {
     return false;
   }
+  //console.debug("draggable part:", draggablePart);
   //console.debug("draggablePart display: ", window.getComputedStyle(draggablePart).display);
   //console.debug("draggablePart visibility: ", window.getComputedStyle(draggablePart).visibility);
   return (window.getComputedStyle(draggablePart).display !== 'none') && (window.getComputedStyle(draggablePart).visibility !== 'hidden');
