@@ -1,9 +1,5 @@
 @import url('../utils.css');
 
-a[data-tooltip] {
-  margin: 4px;
-}
-
 main {
   width: 100%;
   max-width: 100vw;

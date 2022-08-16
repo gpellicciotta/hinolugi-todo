@@ -6,10 +6,6 @@
   }
 }
 
-a[data-tooltip] {
-  margin: 4px;
-}
-
 main {
   width: 100%;
   max-width: 100vw;
@@ -78,7 +74,7 @@ main {
                        "training-data"
                        "training-data-entry"
                        "training-data-actions";
-  grid-template-rows: min-content min-content auto min-content min-content min-content;                       
+  grid-template-rows: auto auto 1fr auto auto auto;                       
   justify-content: stretch;
   justify-items: center;
   align-content: start;
@@ -157,6 +153,12 @@ main {
   gap: 0.5rem;
 }
 
+@media (hover: hover) {
+  .training-data-entry {
+    align-items: flex-start;
+  }
+}
+
 .training-data-actions {
   grid-area: training-data-actions;
   width: 100%;
@@ -169,32 +171,9 @@ main {
   padding-left: 0.5rem;
 }
 
-.group {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: start;
-  align-items: baseline;
-}
-
 .training-day.selected > .training-data-actions,
 .training-day.selected > .training-data-entry {
   display: flex;
-}
-
-@media (hover: none) {
-  a[data-tooltip]:focus, a[data-tooltip]:hover, a[data-tooltip]:active {
-    background-color: inherit;
-    color: inherit;
-  }
-}
-
-.tooltip {
-  display: none;
-  padding: 1em;
-  border: 1px dashed #3e3e3e;
-  border-radius: 1rem;
-  margin: 0.5rem;
 }
 
 li > label {
@@ -212,71 +191,6 @@ li.done > label {
 
 li.done > .item-content > .note {
   text-decoration: line-through;
-}
-
-input[type="checkbox"], input[type="checkbox"]:hover, input[type="checkbox"]:focus, input[type="checkbox"]:active, input[type="checkbox"]:checked {
-  -webkit-appearance: none;
-  outline: none;
-  width: 0;
-  height: 0;
-  padding: 0;
-  margin: 0;
-  border: none;
-}
-
-input {
-  padding: 0.5rem;
-  outline: none;
-  border: 1px solid #3e3e3e;
-  border-radius: 0.125rem;
-    
-  color: #3e3e3e;
-  background-color: #cecece;
-}
-
-input:focus {
-  border: 1px solid var(--blue-hex);
-  color: var(--blue-hex);
-  background-color: white;
-}
-
-button {
-  padding: 0.5rem;
-  border: 1px solid s#3e3e3e;
-  border-radius: 0.125rem;
-
-  background-color: #3e3e3e;
-  color: #cecece;
-}
-
-button.icon-button {
-  padding: 0.5rem; 
-  width: 2rem;
-  height: 2rem;
-  border-radius: 1rem;
-  line-height: 1rem;
-  font-size: 1rem;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-button:hover {
-  background-color: var(--blue-hex);
-  color: white;
-}
-
-button:active {
-  background-color: var(--blue-hex);
-  color: #3e3e3e;
-}
-
-button.disabled {
-  background-color: #cecece;
-  color: #7e7e7e;
-  border: 1px solid #7e7e7e;
 }
 
 @media only screen and (max-width: 600px) {
@@ -356,25 +270,4 @@ li.item.done .tag.status {
   color: white;
   font-size: 75%;
   z-index: 100;
-}
-
-.item-actions>*[draggable] {
-  color: white;
-}
-
-.item-actions>button.icon-button {
-  border-radius: 50%;
-  color: white;
-  background-color: inherit;
-  border: none;
-}
-
-.item-actions>button.icon-button:active,
-.item-actions>button.icon-button:active * {
-  color: var(--red-hex);
-}
-
-.item>.item-actions>*[draggable]:hover,
-.item>.item-actions>*[data-action]:hover {
-  animation: tilt-shaking 0.15s infinite;
 }

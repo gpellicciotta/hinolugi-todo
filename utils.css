@@ -215,6 +215,146 @@ a:hover {
   color: inherit;
 }
 
+a[data-tooltip] {
+  margin: 4px;
+}
+
+@media (hover: none) {
+  a[data-tooltip]:focus,
+  a[data-tooltip]:hover,
+  a[data-tooltip]:active {
+    background-color: inherit;
+    color: inherit;
+  }
+}
+
+.tooltip {
+  display: none;
+  padding: 1em;
+  border: 1px dashed #3e3e3e;
+  border-radius: 1rem;
+  margin: 0.5rem;
+}
+
+.horizontal-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: end;
+  align-items: baseline;
+}
+
+.vertical-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+}
+
+label {
+  font-variant: small-caps;
+  font-size: 80%;
+}
+
+.vertical-group .unit {
+  align-self: end;
+  justify-self: start;
+  vertical-align: top;
+  font-variant: small-caps;
+  font-size: 80%;
+}
+
+input[type="checkbox"],
+input[type="checkbox"]:hover,
+input[type="checkbox"]:focus,
+input[type="checkbox"]:active,
+input[type="checkbox"]:checked {
+  -webkit-appearance: none;
+  outline: none;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+input,
+select {
+  padding: 0.5rem;
+  outline: none;
+  border: 1px solid #3e3e3e;
+  border-radius: 0.125rem;
+
+  color: #3e3e3e;
+  background-color: #cecece;
+}
+
+input:focus,
+select:focus {
+  border: 1px solid var(--blue-hex);
+  color: var(--blue-hex);
+  background-color: white;
+}
+
+button {
+  padding: 0.5rem;
+  border: 1px solid s#3e3e3e;
+  border-radius: 0.125rem;
+
+  background-color: #3e3e3e;
+  color: #cecece;
+}
+
+button.icon-button {
+  padding: 0.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.5rem;
+  line-height: 1.5rem;
+  font-size: 1.5rem;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+button:hover {
+  background-color: var(--blue-hex);
+  color: white;
+}
+
+button:active {
+  background-color: var(--blue-hex);
+  color: #3e3e3e;
+}
+
+button.disabled {
+  background-color: #cecece;
+  color: #7e7e7e;
+  border: 1px solid #7e7e7e;
+}
+
+.item-actions>*[draggable] {
+  color: white;
+}
+
+.item-actions>button.icon-button {
+  border-radius: 50%;
+  color: white;
+  background-color: inherit;
+  border: none;
+}
+
+.item-actions>button.icon-button:active,
+.item-actions>button.icon-button:active * {
+  color: var(--red-hex);
+}
+
+.item>.item-actions>*[draggable]:hover,
+.item>.item-actions>*[data-action]:hover {
+  animation: tilt-shaking 0.15s infinite;
+}
+
 footer {
   display: none;
   flex-direction: column;
