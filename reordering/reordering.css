@@ -130,13 +130,12 @@ button.disabled {
 }
 
 .item:hover {
-  border: 1px solid var(--blue-hex);
+  opacity: 75%;
 }
 
 .dragging {
-  border: 0.25rem dashed #3e3e3e;
-  padding: 0.75rem;
-  opacity: 50%;
+  background-color: var(--red-hex);
+  opacity: 75%;
 }
 
 *[draggable=true] {

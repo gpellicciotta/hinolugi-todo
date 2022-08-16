@@ -49,39 +49,37 @@ function endDrag(cancelled, dropCallBack) {
   };
 }
 
-const registeredListeners = new Map();
-let listenerId = 1;
+const registeredTargetElementListeners = new Map();
+let nextTargetElementListenerId = 1;
 
-function addRevertibleEventListener(targetElement, eventName, eventCallback) {
-  const dataName = `data-reorder-${eventName}-listener`;
-  const listenerName = `listener-${listenerId++}`;
-  const listener = {
-    name: listenerName,
+function addRevertibleEventListener(targetElement, eventType, eventCallback) {
+  const dataAttributeName = `data-reorder-listeners`;
+  let targetElementListenersName = targetElement.getAttribute(dataAttributeName);
+  if (!targetElementListenersName) { // First event listener for this target element:
+    targetElementListenersName = `listener-${nextTargetElementListenerId++}`;
+    registeredTargetElementListeners.set(targetElementListenersName, new Map());
+    targetElement.setAttribute(dataAttributeName, targetElementListenersName);
+  }
+  let eventTypeListeners = registeredTargetElementListeners.get(targetElementListenersName);
+  if (!eventTypeListeners) { // No actual event type listeners yet:
+    eventTypeListeners = new Map();
+    registeredTargetElementListeners.set(targetElementListenersName, eventTypeListeners);    
+  }
+  let eventTypeListener = eventTypeListeners.get(eventType);
+  if (eventTypeListener) { // Unregister if previously registered:
+    eventTypeListener.targetElement.removeEventListener(eventTypeListener.eventName, eventTypeListener.eventCallback);
+    //console.debug(`Event listener '${targetElementListenersName}' for event type '${eventTypeListener.eventType}' has been removed for:`, eventTypeListener.targetElement);
+  }
+  eventTypeListener = {
+    targetElementListenersName: targetElementListenersName,
     targetElement: targetElement,
-    eventName: eventName,
+    eventType: eventType,
     eventCallback, eventCallback
   };
-  removeRevertibleEventListener(targetElement, eventName);
-  registeredListeners.set(listenerName, listener);
-  targetElement.setAttribute(dataName, listenerName);
-  targetElement.addEventListener(listener.eventName, listener.eventCallback);
-  //console.debug(`Event listener '${listenerName}' for event type '${listener.eventName}' has been added for:`, listener.targetElement);
-}
-
-function removeRevertibleEventListener(targetElement, eventName) {
-  const dataName = `data-reorder-${eventName}-listener`;
-  const listenerName = targetElement.getAttribute(dataName);
-  if (!listenerName) {
-    return ;
-  }
-  const listener = registeredListeners.get(listenerName);
-  if (listener) {
-    listener.targetElement.removeEventListener(listener.eventName, listener.eventCallback);
-    //console.debug(`Event listener '${listenerName}' for event type '${listener.eventName}' has been removed for:`, listener.targetElement);
-  }
-  else {
-    console.warn(`Event listener '${listenerName}' is unknown`);
-  }
+  eventTypeListeners.set(eventType, eventTypeListener);  
+  targetElement.addEventListener(eventTypeListener.eventType, eventTypeListener.eventCallback);
+  //console.debug(`Event listener '${targetElementListenersName}' for event type '${eventTypeListener.eventType}' has been added for:`, eventTypeListener.targetElement);
+  //console.debug(registeredTargetElementListeners);
 }
 
 /**
