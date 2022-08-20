@@ -84,6 +84,7 @@ const EMPTY_STATE = '{}';
 
 // State:
 
+let currentAmount = 0;
 let availableConversions = { };
 let selectedConversions = [ ];
 
@@ -95,10 +96,12 @@ function loadFromStorage() {
   // Fill state:
   availableConversions = (state["available-conversions"] && state["available-conversions"].length) || BUILTIN_CONVERSIONS;
   selectedConversions = state["selected-conversions"] || ["kuna to euro", "euro to kuna" ];
+  currentAmount = state["last-amount"] || 0;
 }
 
 function saveToStorage() {
   let state = {
+    "last-amount": currentAmount,
     "available-conversions": availableConversions,
     "selected-conversions": selectedConversions
   };
@@ -120,7 +123,7 @@ function formatNumber(num) {
 function recalculate() {
   // Get amount
   let amount = document.getElementById("amount");
-  let val = +amount.value;
+  currentAmount = +amount.value;
 
   // Re-set list of available conversions:
   let availableConversionsDataList = document.getElementById("available-conversions");
@@ -140,13 +143,13 @@ function recalculate() {
       console.error(`Invalid conversion '${cn}' selected`);
       return ;
     }
-    let convVal = conv.conversion(val);
+    let convVal = conv.conversion(currentAmount);
     let divEl = document.createElement("div");
     divEl.classList.add("conversion");
     divEl.setAttribute("data-index", idx);
     divEl.innerHTML = `
       <span class="conversion-title">${cn}</span>  
-      <span class="from-value">${formatNumber(val)}</span>
+      <span class="from-value">${formatNumber(currentAmount)}</span>
       <span class="from-unit" title="${conv["from-unit-description"]}">${conv["from-unit"]}</span>
       <span class="equal-sign">=</span>
       <span class="to-value">${formatNumber(convVal)}</span>
@@ -196,11 +199,12 @@ function registerInputChange(e, onFun) {
 
 function onDomReady() {
   // Get input/output box elements:
-  let amount = document.getElementById("amount");
+  let amountEl = document.getElementById("amount");
 
   // Register function to run on any change of input
-  registerInputChange(amount, () => {
+  registerInputChange(amountEl, () => {
     recalculate();
+    saveToStorage();
   });
 
   // Get output table + register 'click' action
@@ -214,12 +218,13 @@ function onDomReady() {
 
   // Add items from storage
   loadFromStorage();
+  amountEl.value = currentAmount;
 
-  // Re-build from storage
+  // Re-build from storage loaded values
   recalculate();
 
   // Ensure input has focus
-  amount.focus();
+  amountEl.focus();
 }
 
 function onAddConversionClick(event) {
@@ -230,9 +235,9 @@ function onAddConversionClick(event) {
   if (!selectedConversion || !availableConversions[selectedConversion]) {
     console.error(`Invalid conversion '${selectedConversion}' selected`);
   }
-  selectedConversions.push(selectedConversion);
-  saveToStorage();
+  selectedConversions.push(selectedConversion);  
   recalculate();
+  saveToStorage();
 }
 
 function onConversionsListClick(event) {
@@ -244,9 +249,9 @@ function onConversionsListClick(event) {
     if (actionElement && (actionElement.dataset.action === 'delete') && (actionElement === document.activeElement)) {
       event.stopPropagation();
       const idx = +convElement.dataset.index;
-      selectedConversions.splice(idx, 1);
-      saveToStorage();
+      selectedConversions.splice(idx, 1);      
       recalculate();
+      saveToStorage();
     }
     else if (actionElement && (actionElement.dataset.action === 'copy') && (actionElement === document.activeElement)) {
       event.stopPropagation();
