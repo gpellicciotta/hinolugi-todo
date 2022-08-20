@@ -7,11 +7,26 @@ main {
   margin-right: auto;
 
   display: grid;
+  grid-template-areas: "add-conversion-controls" 
+                       "conversions" 
+                       "enter-amount-controls";
   grid-template-rows: min-content auto min-content;
   grid-template-columns: 1fr;
   justify-items: center;
   justify-content: center;
   align-items: flex-start;
+}
+
+#controls {
+  grid-area: enter-amount-controls;
+}
+
+#conversions {
+  grid-area: conversions;
+}
+
+#add-controls {
+  grid-area: add-conversion-controls;
 }
 
 #controls,
@@ -42,9 +57,10 @@ main {
 
 #add-controls {
   margin-top: 2rem;
+  gap: 1rem;
   flex-direction: row;
   justify-content: end;
-  align-items: stretch;
+  align-items: center;
 }
 
 input, input:focus {
@@ -118,6 +134,12 @@ button {
 
 /* Landscape phone and bigger */
 @media only screen and (min-width: 600px) {
+  main {
+    grid-template-areas: "enter-amount-controls"
+                         "conversions"
+                         "add-conversion-controls";
+  }
+
   #controls,
   #add-controls,
   #conversions {
@@ -174,7 +196,7 @@ button {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   background-color: #3e3e3e;
   overflow: hidden;
 }
@@ -218,6 +240,10 @@ button {
 
 .from-value, .to-value, .from-unit, .to-unit, .equal-sign {
   white-space: pre;
+}
+
+.actions > button.icon-button {
+  font-size: 1em;
 }
 
 .actions>*[draggable] {
