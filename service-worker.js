@@ -1,7 +1,7 @@
 // Service-worker for back-ground caching and processing.
 // Must be put in root, otherwise it won't work
 
-const CACHE_VERSION = 'hinolugi-utils@v1.27.0'; // Update to force deleting any old cache and starting a new
+const CACHE_VERSION = 'hinolugi-utils@v1.28.0'; // Update to force deleting any old cache and starting a new
 
 const STATIC_ASSETS = [
   // Base assets:
@@ -28,7 +28,8 @@ const STATIC_ASSETS = [
   // Unit converter:
   '/unit-converter/unit-converter.html',
   '/unit-converter/unit-converter.css',
-  '/unit-converter/unit-converter.js',
+  '/unit-converter/unit-converter.mjs',
+  '/unit-converter/unit-converter-builtin-conversions.mjs',
   '/unit-converter/unit-converter-icon-96x96.png',
   '/unit-converter/unit-converter-icon-192x192.png',
   '/unit-converter/unit-converter-icon-512x512.png',

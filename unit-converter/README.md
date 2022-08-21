@@ -22,5 +22,7 @@ Keep track of latest used amount.
 
 ### Roadmap for Next Major Version
 Enable configuring a custom conversion.
+Enable loading actual exchange rates.
+Possibly split off the exchange rate conversion into a separate project.
 
   
