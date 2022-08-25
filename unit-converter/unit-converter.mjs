@@ -61,10 +61,30 @@ function recalculate() {
   // Re-set list of available conversions:
   let availableConversionsDataList = document.getElementById("available-conversions");
   availableConversionsDataList.innerHTML = "";
+  let convsAdded = 0;
   for (let ac in availableConversions) {
-    let optEl = document.createElement("option");
-    optEl.setAttribute("value", ac);
-    availableConversionsDataList.appendChild(optEl);
+    let idx = selectedConversions.indexOf(ac);
+    console.log(`Index of '${ac}' is ${idx}`);
+    if (idx === -1) { // Only present if not already selected
+      let optEl = document.createElement("option");
+      optEl.setAttribute("value", ac);
+      availableConversionsDataList.appendChild(optEl);
+      convsAdded += 1;
+    }
+  }
+
+  let allUsedWarningEl = document.getElementById("all-used-warning");
+  let addButton = document.getElementById("add-button");
+  let convInputEl = document.getElementById("select-conversion-input");
+  if (convsAdded === 0) { // There are no more conversions
+    allUsedWarningEl.style.display = "block";
+    convInputEl.style.display = "none";
+    addButton.style.display = "none";
+  }
+  else {
+    allUsedWarningEl.style.display = "none";
+    convInputEl.style.display = "inline";
+    addButton.style.display = "inline";
   }
 
   // Re-set list of actual (= selected) conversions:

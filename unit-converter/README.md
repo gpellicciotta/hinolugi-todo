@@ -16,9 +16,13 @@ Remembers the chosen conversions locally.
 Enables offline install.
 Enables reordering the conversions.
 
-### 2.1.0 (= Current Major Version)
+### 2.1.0
 Better mobile UI with amount entry at bottom.
 Keep track of latest used amount.
+
+### 2.2.0 (= Current Major Version)
+Better mobile UI with sticky positions for all input controls.
+No longer offer to add conversions that have already been added.
 
 ### Roadmap for Next Major Version
 Enable configuring a custom conversion.
