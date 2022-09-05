@@ -1,23 +1,22 @@
 // Service-worker for back-ground caching and processing.
 // Must be put in root, otherwise it won't work
 
-const APP_VERSION = "v1.32.0"
+const APP_VERSION = "v1.40.0"
 const CACHE_NAME = `hinolugi-utils@${APP_VERSION}`; // Update to force deleting any old cache and starting a new
 
 const STATIC_ASSETS = [
   // Base assets:
   '/manifest.json',
   '/index.html',
-  '/utils.css',
-  '/utils.js',
-  '/utils.mjs',
-  '/tooltip.js',
-  '/tooltip.mjs',
-  '/reorder.mjs',
-  '/hinolugi-utils-icon.svg',
-  '/hinolugi-utils-icon-512x512.png',
-  '/hinolugi-utils-icon-192x192.png',
-  '/hinolugi-utils-icon-512x512.png',
+  '/js/utils.js',
+  '/js/utils.mjs',
+  '/js/tooltip.js',
+  '/js/reorder.mjs',
+  '/css/utils.css',
+  '/media/hinolugi-utils-icon.svg',
+  '/media/hinolugi-utils-icon-512x512.png',
+  '/media/hinolugi-utils-icon-192x192.png',
+  '/media/hinolugi-utils-icon-512x512.png',
 
   // Shared assets:
   'https://www.pellicciotta.com/hinolugi-support.js/img/hinolugi-icon.svg',
@@ -28,47 +27,57 @@ const STATIC_ASSETS = [
   'https://fonts.googleapis.com/css?family=Roboto',
 
   // Unit converter:
-  '/unit-converter/unit-converter.html',
-  '/unit-converter/unit-converter.css',
-  '/unit-converter/unit-converter.mjs',
-  '/unit-converter/unit-converter-builtin-conversions.mjs',
-  '/unit-converter/unit-converter-icon-96x96.png',
-  '/unit-converter/unit-converter-icon-192x192.png',
-  '/unit-converter/unit-converter-icon-512x512.png',
-  '/unit-converter/unit-converter-icon.svg',
+  '/utils/unit-converter/unit-converter.html',
+  '/utils/unit-converter/unit-converter.css',
+  '/utils/unit-converter/unit-converter.mjs',
+  '/utils/unit-converter/unit-converter-builtin-conversions.mjs',
+  '/utils/unit-converter/unit-converter-icon-96x96.png',
+  '/utils/unit-converter/unit-converter-icon-192x192.png',
+  '/utils/unit-converter/unit-converter-icon-512x512.png',
+  '/utils/unit-converter/unit-converter-icon.svg',
 
   // Todo list:
-  '/todo-list/todo.html',
-  '/todo-list/todo.css',
-  '/todo-list/todo.js',
-  '/todo-list/todo-icon-96x96.png',
-  '/todo-list/todo-icon-192x192.png',
-  '/todo-list/todo-icon-512x512.png',
-  '/todo-list/todo-icon.svg',
+  '/utils/todo-list/todo.html',
+  '/utils/todo-list/todo.css',
+  '/utils/todo-list/todo.js',
+  '/utils/todo-list/todo-icon-96x96.png',
+  '/utils/todo-list/todo-icon-192x192.png',
+  '/utils/todo-list/todo-icon-512x512.png',
+  '/utils/todo-list/todo-icon.svg',
 
   // Morse code:
-  '/morse/morse.html',
-  '/morse/morse.css',
-  '/morse/morse.js',
-  '/morse/morse-icon-96x96.png',
-  '/morse/morse-icon-192x192.png',
-  '/morse/morse-icon-512x512.png',
-  '/morse/morse-icon.svg',
+  '/utils/morse/morse.html',
+  '/utils/morse/morse.css',
+  '/utils/morse/morse.js',
+  '/utils/morse/morse-icon-96x96.png',
+  '/utils/morse/morse-icon-192x192.png',
+  '/utils/morse/morse-icon-512x512.png',
+  '/utils/morse/morse-icon.svg',
 
   // Reordering:
-  '/reordering/reordering.html',
-  '/reordering/reordering.css',
-  '/reordering/reordering.js',
+  '/utils/reordering/reordering.html',
+  '/utils/reordering/reordering.css',
+  '/utils/reordering/reordering.js',
 
   // Box shadow CSS:
-  '/box-shadow/box-shadow.html',
-  '/box-shadow/box-shadow.css',
-  '/box-shadow/box-shadow.js',
+  '/utils/box-shadow/box-shadow.html',
+  '/utils/box-shadow/box-shadow.css',
+  '/utils/box-shadow/box-shadow.js',
+
+  // Training tracker:
+  '/utils/training-tracker/training-tracker.html',
+  '/utils/training-tracker/training-tracker.css',
+  '/utils/training-tracker/training-tracker.mjs',  
+  '/utils/training-tracker/training-tracker-icon.svg',  
+  '/utils/training-tracker/training-tracker-96x96.png',  
+  '/utils/training-tracker/training-tracker-512x512.png',  
+  '/utils/training-tracker/half-marathon-training-schedule.json',  
+  '/utils/training-tracker/first-half-marathon-training.json',  
   
   // Internals:
-  '/internals/internals.html',
-  '/internals/internals.css',
-  '/internals/internals.js'
+  '/utils/internals/internals.html',
+  '/utils/internals/internals.css',
+  '/utils/internals/internals.js'
 ];
 
 self.addEventListener('install', function(event) {

@@ -1,0 +1,112 @@
+{
+  "name": "First Half Marathon Training",
+  "status": "open",
+  "creation-time": "2022-08-11T08:00:00",
+  "sessions": [
+    {
+      "date": "2022-08-11T11:00:00",
+      "ref": {
+        "schedule": "Half Marathon",
+        "exercise": "Training 1"
+      },
+      "goals": {
+        "distance": [ 3.2, "km" ]
+      },
+      "achievements": {
+        "distance": [ 3.2, "km" ],
+        "time": "0:22:00"
+      },
+      "notes": "No problems - on the Finnish track"
+    },
+    {
+      "date": "2022-08-13T10:22:00",
+      "ref": {
+        "schedule": "Half Marathon",
+        "exercise": "Training 2"
+      },
+      "goals": {
+        "distance": [ 4.8, "km" ]
+      },
+      "achievements": {
+        "distance": [ 4.89, "km" ],
+        "time": "0:27:46"
+      },
+      "notes": "OK"
+    },
+    {
+      "date": "2022-08-15T07:41:00",
+      "ref": {
+        "schedule": "Half Marathon",
+        "exercise": "Training 3"
+      },
+      "goals": {
+        "distance": [ 6.4, "km" ]
+      },
+      "achievements": {
+        "distance": [ 7.05, "km" ],
+        "time": "0:45:14"
+      },
+      "notes": "OK"
+    },
+    {
+      "date": "2022-08-17T07:33:00",
+      "ref": {
+        "schedule": "Half Marathon",
+        "exercise": "Training 4"
+      },
+      "goals": {
+        "distance": [ 3.2, "km" ]
+      },
+      "achievements": {
+        "distance": [ 3.98, "km" ],
+        "time": "0:23:55"
+      },
+      "notes": "No problems"
+    },
+    {
+      "date": "2022-08-19T07:18:00",
+      "ref": {
+        "schedule": "Half Marathon",
+        "exercise": "Training 5"
+      },
+      "goals": {
+        "distance": [ 4.8, "km" ]
+      },
+      "achievements": {
+        "distance": [ 4.87, "km" ],
+        "time": "0:29:42"
+      },
+      "notes": "No problems"
+    },
+    {
+      "date": "2022-08-21T09:24:00",
+      "ref": {
+        "schedule": "Half Marathon",
+        "exercise": "Training 6"
+      },
+      "goals": {
+        "distance": [ 8, "km" ]
+      },
+      "achievements": {
+        "distance": [ 8.4, "km" ],
+        "time": "0:52:01"
+      },
+      "notes": "First 4K were OK, then my left achilles hurt and I had to slow down"
+    },
+    {
+      "date": "2022-08-23T06:45:00",
+      "ref": {
+        "schedule": "Half Marathon",
+        "exercise": "Training 7"
+      },
+      "goals": {
+        "distance": [ 3.2, "km" ]
+      },
+      "achievements": {
+        "distance": [ 3.69, "km" ],
+        "time": "0:21:40"
+      },
+      "notes": "No problems"
+    }
+  ]
+}

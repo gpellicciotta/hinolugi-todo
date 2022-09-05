@@ -1,0 +1,143 @@
+@import url('/css/utils.css');
+
+body {
+  background-color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.8)
+}
+
+header {
+  padding-bottom: 0;
+}
+
+h2 {
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+
+  font-variant: small-caps;
+}
+
+main {
+  align-items: stretch;
+  max-width: 50rem;
+  justify-self: center;
+}
+
+#controls {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem 1rem;
+  justify-items: stretch;
+  align-items: baseline;
+}
+
+label {
+  width: 100%;
+  height: 100%;
+  text-align: right;
+  justify-self: end;
+  align-self: baseline;
+}
+
+input {
+  padding: 0.125rem;
+  height: 100%;
+  align-self: baseline;
+}
+
+input[type=number] {
+  width: 3rem;
+}
+
+input[type=checkbox] {
+  width: 1rem;
+  align-self: flex-start;
+}
+
+kbd {
+  font-family: 'Roboto Mono', 'Consolas', monospace;
+}
+
+a[data-tooltip] {
+  margin: 4px;
+}
+
+@media (hover: none) {
+
+  a[data-tooltip]:focus,
+  a[data-tooltip]:hover,
+  a[data-tooltip]:active {
+    background-color: inherit;
+    color: inherit;
+  }
+}
+
+button {
+  margin: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #3e3e3e;
+  border-radius: 0.125rem;
+
+  background-color: #3e3e3e;
+  color: #cecece;
+}
+
+button:hover {
+  background-color: #cecece;
+  color: #3e3e3e;
+}
+
+button:active {
+  background-color: #3e3e3e;
+  color: white;
+}
+
+button.disabled {
+  background-color: #cecece;
+  color: #7e7e7e;
+  border: 1px solid #7e7e7e;
+}
+
+#item-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+#item-list.horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.item {
+  border: 1px solid #3e3e3e;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  margin: 0.5rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 1rem;
+
+  background-color: var(--blue-hex);
+  color: white;
+}
+
+.item:hover {
+  opacity: 75%;
+}
+
+.dragging {
+  background-color: var(--red-hex);
+  opacity: 75%;
+}
+
+*[draggable=true] {
+  cursor: move;
+}

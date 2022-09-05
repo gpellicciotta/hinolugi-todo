@@ -41,7 +41,6 @@ Online tools and utilities that should offer quick help with very specific needs
 ## Implementation Help
 
 ## Inkscape:
-
 - To rotate shape: first show the transform handles, then click the shape itself to change them to rotate handles
 
 ### Offline/PWA:

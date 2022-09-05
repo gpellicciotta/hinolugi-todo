@@ -1,0 +1,122 @@
+@import url('/css/utils.css');
+
+main {
+  align-items: stretch;
+}
+
+h2 {
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+
+  font-variant: small-caps;
+}
+
+#to-translate, #translated, #play-feedback {
+  padding: 1rem;
+  font-family: 'Roboto Mono', 'Consolas', monospace;
+  background-color: #cecece;
+  border: 1px solid #3e3e3e;
+  margin-bottom: 1rem;
+}
+
+kbd {
+  font-family: 'Roboto Mono', 'Consolas', monospace;
+}
+
+a[data-tooltip] {
+  margin: 4px;
+}
+
+@media (hover: none) {
+  a[data-tooltip]:focus, a[data-tooltip]:hover, a[data-tooltip]:active {
+    background-color: inherit;
+    color: inherit;
+  }
+}
+
+.tooltip {
+  display: none;
+  padding: 1em;
+  border: 1px dashed #3e3e3e;
+  border-radius: 1rem;
+  margin: 0.5rem;
+}
+
+#controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+}
+
+button {
+  margin: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #3e3e3e;
+  border-radius: 0.125rem;
+
+  background-color: #3e3e3e;
+  color: #cecece;
+}
+
+button:hover {
+  background-color: #cecece;
+  color: #3e3e3e;
+}
+
+button:active {
+  background-color: #3e3e3e;
+  color: white;
+}
+
+button.disabled {
+  background-color: #3e3e3e;
+  color: #7e7e7e;
+  border: 1px solid #7e7e7e;
+}
+
+#play-feedback {
+  min-width: 10rem;
+  margin: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #3e3e3e;
+  border-radius: 0.125rem;
+}
+
+#play-feedback.on {
+  background-color: #3e3e3e;
+}
+
+/* Landscape phone and bigger */
+@media only screen and (min-width: 800px) {
+  main {
+    /* Using max-width: 80% always aligns things left */
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+}
+
+#to-translate:focus {
+  outline: none;
+}
+
+.error {
+  color: var(--red-hex);
+}
+
+.error[data-error] {
+  position: relative;
+}
+
+.error[data-error]:hover::after {
+  content: attr(data-error);
+  position: absolute;
+  top: 1.5em;
+  left: 0;
+  padding: 0.25rem;
+  background-color: var(--red-hex);
+  border: 1px dotted #3e3e3e;
+  color: white;
+  font-size: 75%;
+  z-index: 100;
+}
