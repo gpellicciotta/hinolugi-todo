@@ -7,22 +7,22 @@
     {
       "type": "chrome",
       "request": "launch",
-      "name": "Debug todo",
-      "url": "http://localhost:5501/todo-list/todo.html",
+      "name": "Debug internals",
+      "url": "http://localhost:5502/utils/internals/internals.html",
       "webRoot": "${workspaceFolder}"
     },
     {
       "type": "chrome",
       "request": "launch",
       "name": "Debug morse",
-      "url": "http://localhost:5501/morse/morse.html",
+      "url": "http://localhost:5502/morse/morse.html",
       "webRoot": "${workspaceFolder}"
     },    
     {
       "type": "chrome",
       "request": "launch",
       "name": "Debug index",
-      "url": "http://localhost:5501/index.html",
+      "url": "http://localhost:5502/index.html",
       "webRoot": "${workspaceFolder}"
     }
   ]

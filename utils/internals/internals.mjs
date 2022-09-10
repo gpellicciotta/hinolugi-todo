@@ -1,8 +1,9 @@
-document.addEventListener('DOMContentLoaded', onDomReady);
-
 // Constants and builtin data:
-
+const UTILITY_VERSION = '1.1.0'
 const EMPTY_STATE = '{}';
+
+// Startup:
+document.addEventListener('DOMContentLoaded', onDomReady);
 
 // State:
 
@@ -15,6 +16,20 @@ function saveToStorage() {
 }
 
 function onDomReady() {
+  const storageKeysSelectEl = document.getElementById("storage-keys");
+  refreshListOfStorageKeys().then(refreshActiveStorageKeyValue);
+  storageKeysSelectEl.addEventListener("change", refreshActiveStorageKeyValue);
+  const refreshStorageKeysButtonEl = document.getElementById("refresh-storage-keys");
+  refreshStorageKeysButtonEl.addEventListener("click", async () => { return refreshListOfStorageKeys().then(refreshActiveStorageKeyValue); });
+  const clearStorageKeyButtonEl = document.getElementById("clear-storage-key");
+  clearStorageKeyButtonEl.addEventListener("click", async () => { return clearActiveStorageKey().then(refreshListOfStorageKeys).then(refreshActiveStorageKeyValue); });
+  const deleteAllStorageKeysButtonEl = document.getElementById("delete-all-storage-keys");
+  deleteAllStorageKeysButtonEl.addEventListener("click", async () => { return deleteAllStorageKeys().then(refreshListOfStorageKeys).then(refreshActiveStorageKeyValue); });
+  const exportAllStorageKeysButtonEl = document.getElementById("export-all-storage-keys");
+  exportAllStorageKeysButtonEl.addEventListener("click", exportAllStorageKeys);
+  const importAllStorageKeysButtonEl = document.getElementById("import-all-storage-keys");
+  importAllStorageKeysButtonEl.addEventListener("change", async () => { return importAllStorageKeys().then(refreshListOfStorageKeys).then(refreshActiveStorageKeyValue); });
+
   const cacheSelectEl = document.getElementById("caches");
   refreshListOfCaches().then(refreshActiveCacheElementsList);
 
@@ -29,6 +44,117 @@ function onDomReady() {
   fillCacheButtonEl.addEventListener("click", async () => { return fillActiveCache().then(refreshActiveCacheElementsList).then(refreshActiveCacheElementsList); });
 
   fillApplicationInfo();
+}
+
+async function refreshListOfStorageKeys() {
+  console.log(`Refreshing list of storage keys:`);
+  const storageKeysSelectEl = document.getElementById("storage-keys");
+  const currentStorageKey = storageKeysSelectEl.value;
+  storageKeysSelectEl.innerHTML = '';
+  let keyNames = [];
+  let selected = false;
+  for (let i = 0; i < localStorage.length; i++) {
+    const localKeyName = localStorage.key(i);
+    console.log(`Adding local storage key '${localKeyName}':`);
+    storageKeysSelectEl.innerHTML += `<option value="${localKeyName}" ${localKeyName === currentStorageKey ? 'selected' : ''}>${localKeyName}</option>`;
+    if (localKeyName === currentStorageKey) {
+      selected = true;
+    }
+    keyNames.push(localKeyName);
+  }
+  if (!selected && keyNames) { // Select first as default
+    storageKeysSelectEl.value = keyNames[0]
+  }
+  return Promise.resolve(keyNames);
+}
+
+function refreshActiveStorageKeyValue() {
+  const storageKeysSelectEl = document.getElementById("storage-keys");
+  const currentKey = storageKeysSelectEl.value;
+  console.log(`Refreshing cache value for '${currentKey}'`);
+  const storageValueEl = document.getElementById("storage-value");
+  const val = localStorage.getItem(currentKey);
+  if (!val) {
+    storageValueEl.innerText = '<no value>';
+  }
+  else {
+    let valStr = val;
+    try {
+      valStr = JSON.stringify(JSON.parse(val), null, 2);
+    }
+    catch (e) { 
+      console.error("Failed to interpret local storage value as JSON: ", e);
+      valStr = "\"" + val + "\"";
+    }
+    storageValueEl.innerText = valStr;
+  }
+}
+
+async function clearActiveStorageKey() {
+  const storageKeysSelectEl = document.getElementById("storage-keys");
+  const currentKey = storageKeysSelectEl.value;
+  console.log(`Clearing active storage key '${currentKey}':`);
+  localStorage.removeItem(currentKey);
+}
+
+async function deleteAllStorageKeys() {
+  console.log(`Clearing all local storage keys`);
+  localStorage.clear();
+}
+
+async function exportAllStorageKeys() {
+  console.log(`Exporting local storage:`);
+  let lsObj = {};
+  for (let i = 0; i < localStorage.length; i++) {
+    const localKeyName = localStorage.key(i);
+    console.log(`Adding local storage key '${localKeyName}':`);
+    lsObj[localKeyName] = localStorage.getItem(localKeyName);
+  }
+  const serializedLs = JSON.stringify(lsObj, null, 2);
+  console.log(serializedLs);
+
+  let aEl = document.createElement("a");
+  aEl.setAttribute("download", "localStorage.json");
+  aEl.setAttribute("href",  URL.createObjectURL(new Blob([JSON.stringify({ "localStorage": lsObj }, null, 2)])));
+  aEl.innerText = "Download LocalStorage";
+  aEl.style.width = "`1px";
+  document.body.appendChild(aEl);
+  aEl.click();
+  aEl.remove();
+}
+
+async function importAllStorageKeys() {
+  const importAllStorageKeysButtonEl = document.getElementById("import-all-storage-keys");
+  const files = importAllStorageKeysButtonEl.files;
+  if (files.length !== 1) {
+    console.error(`Not importing local storage from '${files.length}' files`);
+    return Promise.reject();
+  }
+  const importFile = files[0];
+  console.log(`Importing local storage from '${importFile.name}':`);
+  return new Promise(function(resolve, reject) {
+    const fr = new FileReader();
+    fr.onload = (e) => {
+      const content = e.target.result;
+      const obj = JSON.parse(content);
+      if (obj.hasOwnProperty("localStorage")) {
+        for (let key in obj.localStorage) {
+          console.log(`Loading key '${key}' with value '${JSON.stringify(obj.localStorage[key])}'`);
+          localStorage.setItem(key, obj.localStorage[key]);
+        }
+        console.log("Loaded local storage");
+        importAllStorageKeysButtonEl.value = ''; 
+        resolve("Loaded");
+      }
+      else {
+        const err = `Unknown file contents: ${content.substring(0, 20)}`;
+        console.log(err);
+        importAllStorageKeysButtonEl.value = '';
+        reject(err)
+      }
+    };
+    fr.readAsText(importFile);
+  });
 }
 
 async function fillApplicationInfo() {
@@ -52,6 +178,11 @@ async function fillApplicationInfo() {
       appDescriptionEl.innerText = appDescription;
       const installed = window.matchMedia('(display-mode: standalone)').matches;
       appInstalledEl.innerText = installed ? 'Yes' : 'No';
+
+      const appVersionEls = document.querySelectorAll(".app-version");
+      appVersionEls.forEach((el) => { el.innerText = appVersion; })
+      const internalsVersionEls = document.querySelectorAll(".internals-version");
+      internalsVersionEls.forEach((el) => { el.innerText = UTILITY_VERSION; })
     })
     .catch(err => console.error("cannot load manifest.json:", err));  
 }
@@ -67,7 +198,6 @@ const STATIC_ASSETS = [
   'http://127.0.0.1:5502/media/hinolugi-utils-icon.svg',
   'http://127.0.0.1:5502/media/hinolugi-utils-icon-512x512.png',
   'http://127.0.0.1:5502/media/hinolugi-utils-icon-192x192.png',
-  'http://127.0.0.1:5502/media/hinolugi-utils-icon-512x512.png',
 
   // Shared assets:
   'https://www.pellicciotta.com/hinolugi-support.js/img/hinolugi-icon.svg',
@@ -78,9 +208,9 @@ const STATIC_ASSETS = [
   'https://www.pellicciotta.com/hinolugi-support.js/css/colors.css',
 
   // Box shadow CSS:
-  'http://127.0.0.1:5502/box-shadow/box-shadow.html',
-  'http://127.0.0.1:5502/box-shadow/box-shadow.css',
-  'http://127.0.0.1:5502/box-shadow/box-shadow.js'
+  'http://127.0.0.1:5502/utils/box-shadow/box-shadow.html',
+  'http://127.0.0.1:5502/utils/box-shadow/box-shadow.css',
+  'http://127.0.0.1:5502/utils/box-shadow/box-shadow.js'
 ];
 
 async function fillActiveCache() {

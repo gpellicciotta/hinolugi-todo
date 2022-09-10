@@ -124,7 +124,7 @@ main > p {
     display: grid;
     grid-template-columns: repeat(auto-fit, 10rem);
     grid-template-rows: repeat(auto-fit, minmax(10rem, min-content));
-    justify-content: start;
+    justify-content: center;
     justify-items: center;
     align-items: flex-start;
   }
@@ -202,7 +202,7 @@ table, table * {
 
 table tr:not(:last-of-type) {
   border: none;
-  border-bottom: 1px solid #3e3e3e;
+  border-bottom: 0.5px solid #3e3e3e;
 }
 
 table tr:nth-child(odd) {
@@ -221,8 +221,16 @@ table th, table td {
   padding: 0.75rem;  
 }
 
-table th {
-  background-color: #3e3e3e;
+table tr:nth-child(odd) th {
+  background-color: #3e3e3eaa;
+  border-bottom: 0.5px solid #cecece;
+  color: #cecece;
+  text-align: left;
+}
+
+table tr:nth-child(even) th {
+  background-color: #3e3e3ecc;
+  border-bottom: 1px solid #cecece;
   color: #cecece;
   text-align: left;
 }

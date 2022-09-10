@@ -1,7 +1,7 @@
 // Service-worker for back-ground caching and processing.
 // Must be put in root, otherwise it won't work
 
-const APP_VERSION = "v1.40.0"
+const APP_VERSION = "v1.41.0"
 const CACHE_NAME = `hinolugi-utils@${APP_VERSION}`; // Update to force deleting any old cache and starting a new
 
 const STATIC_ASSETS = [
@@ -16,7 +16,6 @@ const STATIC_ASSETS = [
   '/media/hinolugi-utils-icon.svg',
   '/media/hinolugi-utils-icon-512x512.png',
   '/media/hinolugi-utils-icon-192x192.png',
-  '/media/hinolugi-utils-icon-512x512.png',
 
   // Shared assets:
   'https://www.pellicciotta.com/hinolugi-support.js/img/hinolugi-icon.svg',
@@ -77,7 +76,7 @@ const STATIC_ASSETS = [
   // Internals:
   '/utils/internals/internals.html',
   '/utils/internals/internals.css',
-  '/utils/internals/internals.js'
+  '/utils/internals/internals.mjs'
 ];
 
 self.addEventListener('install', function(event) {

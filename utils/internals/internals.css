@@ -34,6 +34,13 @@ input, input:focus, select, select:focus {
   padding-bottom: 1rem;
 }
 
+#storage-value {
+  padding: 1rem;
+  white-space: pre;
+  font-family: 'Roboto Mono', 'Courier', monospace;
+  font-size: 75%;
+}
+
 #application-info {
   width: 100%;
 }
@@ -44,6 +51,7 @@ input, input:focus, select, select:focus {
 }
 
 #cache-elements * {
+  padding: 1rem;
   font-family: 'Roboto Mono', 'Courier', monospace;
   font-size: 75%;
 }
@@ -70,6 +78,35 @@ button {
   background-color: #3e3e3e;
   border: 1px solid #3e3e3e;
   color: white;
+}
+
+label.file-upload-button {
+  display: inline-block;
+  cursor: pointer;
+  font-size: 100%;
+
+  padding: 0.5rem;
+  border: 1px solid #3e3e3e;
+  border-radius: 0.125rem;
+  font-variant-caps: inherit;
+  text-transform: none;
+
+  background-color: #3e3e3e;
+  color: white;
+}
+
+label.file-upload-button:hover {
+  background-color: var(--blue-hex);
+  color: white;
+}
+
+label.file-upload-button:active {
+  background-color: var(--blue-hex);
+  color: #3e3e3e;
+}
+
+input[type=file] {
+  display: none;
 }
 
 #all-used-warning {
