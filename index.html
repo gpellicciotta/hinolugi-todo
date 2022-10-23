@@ -1,66 +1,38 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>HiNoLuGi Utils</title>
+  <head lang="en">
+    <title>ToDo List</title>
     <meta charset="utf-8">
-    <meta name="description" content="A collection of small web-based utilities and tools">
-    <meta name='keywords' content='utility tool'>
-    <meta name='author' content='Giovanni Pellicciotta'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="todo list utility">
+    <meta name='keywords' content='todo utility tool'>
+    <meta name='author' content='Giovanni Pellicciotta'>
     <meta name="apple-mobile-web-app-status-bar" content="#3e3e3e" />
     <meta name="theme-color" content="#3e3e3e" />
-    <link rel="shortcut icon" href="/media/hinolugi-utils-icon-512x512.png" type="image/png" >
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/css/utils.css">
-    <script src="/js/utils.js" defer></script>
+    <link rel="shortcut icon" href="/media/todo-icon.svg" type="image/svg" >    
+    <link rel="stylesheet" href="/css/todo.css" type="text/css">
+    <script src="/js/todo.mjs" type="module" defer></script>
   </head>
   <body>
-    <header>
-      <h1><img src="https://www.pellicciotta.com/hinolugi-support.js/img/hinolugi-logo.svg"> Utils</h1>
-      <p class="app-description">A small set of online utilities and tools.</p>
-    </header>
-    <main>
-      <div id="tool-list">
-        <a class="tool" href="/utils/unit-converter/unit-converter.html">
-          <span class="tool-name">Unit Converter</span>
-          <span class="tool-description">A simple unit converter</span>
-          <img class="tool-icon" src="/utils/unit-converter/unit-converter-icon.svg">
-        </a>
-        <a class="tool" href="/utils/todo-list/todo.html">
-          <span class="tool-name">ToDo List</span>
-          <span class="tool-description">A simple todo-list for short-term use</span>
-          <img class="tool-icon" src="/utils/todo-list/todo-icon.svg">
-        </a>
-        <a class="tool" href="/utils/training-tracker/training-tracker.html">
-          <span class="tool-name">Training Tracker</span>
-          <span class="tool-description">Track training exercises</span>
-          <img class="tool-icon" src="/utils/training-tracker/training-tracker-icon.svg">
-        </a>
-        <a class="tool" href="/utils/morse/morse.html">
-          <span class="tool-name">Morse Translator</span>
-          <span class="tool-description">Morse code to text, or vice versa</span>
-          <img class="tool-icon" src="/utils/morse/morse-icon.svg">
-        </a>
-        <a class="tool" href="/utils/reordering/reordering.html">
-          <span class="tool-name">List Reordering</span>
-          <span class="tool-description">Javascript-based list reordering test</span>
-          <img class="tool-icon" src="/media/hinolugi-utils-icon.svg">
-        </a>
-        <a class="tool" href="/utils/box-shadow/box-shadow.html">
-          <span class="tool-name">CSS Box Shadow</span>
-          <span class="tool-description">CSS box-shadow creator</span>
-          <img class="tool-icon" src="/media/hinolugi-utils-icon.svg">
-        </a>
-        <a class="tool" href="/utils/internals/internals.html">
-          <span class="tool-name">Internals &amp; Settings</span>
-          <span class="tool-description">Change global settings and inspect internals</span>
-          <img class="tool-icon" src="/media/hinolugi-utils-icon.svg">
-        </a>
-      </div>
+    <main id="intro-screen" class="intro-view">
+      <section class="no-javascript error">
+        <h1 class="animated rotating-half">:-(</h1>
+        <p>If you see this, you don't have javascript enabled.</p>
+        <p>Since this is a web-<b>app</b> and not just a web-<b>site</b>: it won't work without.</p>
+      </section>
+      <h1>Todo List</h1>
+      <svg alt="App Logo" class="banner-logo">
+        <use xlink:href="media/todo-icons.svg#logo"></use>
+      </svg>
+      <section>
+        <p>No surprises here. It is what you expect:</p>
+        <ol>
+          <li>One or more lists of items to keep track of</li>
+          <li>Each item can be marked as <em>done</em> or <em>not done</em></li>
+        </ol>
+      </section>
     </main>
-    <footer>
-      <p><span class="app-name">HiNoLuGi Utils</span> <span class="app-version">v{{unknown}}</span></p>
-      <p>Copyright &copy; Giovanni Pellicciotta</p>
-    </footer>
   </body>
 </html>

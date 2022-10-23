@@ -1,0 +1,112 @@
+@import url('https://www.pellicciotta.com/hinolugi-support.js/css/reset.css');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+@import url('/css/animations.css');
+@import url('/css/default-theme.css');
+
+/* Global Styles */
+
+body {
+  min-width: max(20rem, 100vw);
+  min-height: max(20rem, 100vh);
+  line-height: 1.75;
+  font-size: 1.25rem;
+}
+
+p, li, td {
+  white-space: pre-wrap;
+  display: inline;
+}
+
+.error {
+  color: var(--red-hex);
+}
+
+/* Intro Screen Styles */
+
+main#intro-screen {  
+  /* Position */
+  z-index: var(--splash-screen-z-level);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: no-content;
+
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* Style */
+  gap: 3rem;
+  align-self: center;
+  justify-self: center;
+  padding: 2rem;
+  line-height: 1.25em;
+}
+
+main#intro-screen h1 {
+  font-size: 3rem;
+  font-weight: bolder;
+  white-space: nowrap;
+}
+
+main#intro-screen .banner-logo {
+  min-width: 5rem;
+  min-height: 5rem;
+  width: 30vmax;  
+  height: 30vmax;
+  max-width: 60vmin;
+  max-height: 60vmin;
+  animation: swing-30-left-and-right 18s linear 3s infinite;
+}
+
+main#intro-screen section, main#intro-screen section ol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main#intro-screen ol {
+  padding: 1rem;
+}
+
+main#intro-screen p {
+  padding-bottom: 0.5em;
+  text-align: center;
+}
+
+main#intro-screen ol li {
+  padding-bottom: 0.5em;
+  text-align: center;
+}
+
+main#intro-screen em {
+  font-style: italic;
+}
+
+main#intro-screen ol > li::before {
+  content: "\00AB";
+  padding-right: 0.5em;
+}
+
+main#intro-screen ol > li::after {
+  content: "\00BB";
+  padding-left: 0.5em;
+}
+
+main#intro-screen .no-javascript h1 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+main#intro-screen .no-javascript h1.rotating-half {
+  animation: swing-180-clockwise 18s linear 3s infinite;
+}

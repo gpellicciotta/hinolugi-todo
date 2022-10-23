@@ -83,7 +83,7 @@ function addRevertibleEventListener(targetElement, eventType, eventCallback) {
 }
 
 /**
- * Make a container's child elements re-ordeable by enabling dragging them into a new position.
+ * Make a container's child elements re-ordable by enabling dragging them into a new position.
  * 
  * @param containerEl The container that is expected to have child elements to be re-ordered by dragging.
  * @param dropCallBack Function to be invoked when an element is dropped. The argument will be the element being dropped.

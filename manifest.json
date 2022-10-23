@@ -1,9 +1,9 @@
 {
-  "short_name": "HiNoLuGi Utils",
-  "name": "HiNoLuGi Utils",
-  "version": "1.41.0",
-  "id": "hinolugi-utils",
-  "description": "A set of online utilities and tools.",
+  "short_name": "HiNoLuGi ToDo",
+  "name": "HiNoLuGi ToDo",
+  "version": "2.1.0",
+  "id": "hinolugi-todo",
+  "description": "A simple todo app",
   "scope": "/",
   "start_url": "/",
   "background_color": "#cecece",
@@ -11,22 +11,17 @@
   "display": "standalone",
   "icons": [
     {
-      "src": "/media/hinolugi-utils-icon-512x512.png",
+      "src": "/media/todo-icon-512x512.png",
       "type": "image/png",
       "sizes": "512x512"
     },
-    { 
-      "src": "/media/hinolugi-utils-icon-192x192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
     {
-      "src": "/media/hinolugi-utils-icon-96x96.png",
+      "src": "/media/todo-icon-96x96.png",
       "type": "image/png",
       "sizes": "96x96"
     },
     {
-      "src": "/media/hinolugi-utils-icon.svg",
+      "src": "/media/todo-icon.svg",
       "type": "image/svg+xml",
       "sizes": "512x512"
     }

@@ -1,0 +1,96 @@
+/*
+ * Named Effects/Animations
+ * ========================
+ *
+ * CSS keyframes that can be used for transition effects.
+ */
+
+ /* Rotate from 0 to 360 degrees */
+ @keyframes rotate-360-clockwise {
+    0% { transform: rotate(0deg);   }
+  100% { transform: rotate(360deg); }
+}
+
+ /* Rotate from 0 to -360 degrees */
+ @keyframes rotate-360-clockwise {
+    0% { transform: rotate(0deg);   }
+  100% { transform: rotate(-360deg); }
+}
+
+/* Rotate from 0 to 180 degrees and back */
+@keyframes swing-180-clockwise {
+    0% { transform: rotate(0deg);   }
+   50% { transform: rotate(180deg); }
+  100% { transform: rotate(0deg);   }
+}
+
+/* Rotate from 0 to -180 degrees and back */
+@keyframes swing-180-counter-clockwise {
+    0% { transform: rotate(0deg);    }
+   50% { transform: rotate(-180deg); }
+  100% { transform: rotate(0deg);    }
+}
+
+/* Rotate left and right 90 degrees */
+@keyframes swing-90-left-and-right {
+    0% { transform: rotate(0deg);    }
+   25% { transform: rotate(-90deg);  }
+   75% { transform: rotate(90deg);   }
+  100% { transform: rotate(0deg);    }
+}
+
+/* Rotate left and right 90 degrees */
+@keyframes swing-45-left-and-right {
+    0% { transform: rotate(0deg);    }
+   25% { transform: rotate(-45deg);  }
+   75% { transform: rotate(45deg);   }
+  100% { transform: rotate(0deg);    }
+}
+
+/* Rotate left and right 90 degrees */
+@keyframes swing-30-left-and-right {
+    0% { transform: rotate(0deg);    }
+   25% { transform: rotate(-30deg);  }
+   75% { transform: rotate(30deg);   }
+  100% { transform: rotate(0deg);    }
+}
+
+/* Rotate left and right 10 degrees */
+@keyframes swing-10-left-and-right {
+    0% { transform: rotate(0deg);    }
+   25% { transform: rotate(-10deg);  }
+   75% { transform: rotate(10deg);   }
+  100% { transform: rotate(0deg);    }
+}
+
+/* Rotate left and right 5 degrees */
+@keyframes swing-5-left-and-right {
+    0% { transform: rotate(0deg);  }
+   25% { transform: rotate(-5deg);  }
+   75% { transform: rotate(5deg);  }
+  100% { transform: rotate(0deg);  }
+}
+
+/* Shake right and left 5 pixels */
+@keyframes move-5-right-and-left {
+    0% { transform: translateX(0px);  }
+   25% { transform: translateX(5px);  }
+   75% { transform: translateX(-5px);  }
+  100% { transform: translateX(0px);  }
+}
+
+/* Shake up and down 5 pixels */
+@keyframes move-5-up-and-down {
+    0% { transform: translateY(0px);  }
+   25% { transform: translateY(5px);  }
+   75% { transform: translateY(-5px);  }
+  100% { transform: translateY(0px);  }
+}
+
+/* Shake down and up 5 pixels */
+@keyframes move-5-down-and-up {
+    0% { transform: translateY(0px);  }
+   25% { transform: translateY(-5px);  }
+   75% { transform: translateY(5px);  }
+  100% { transform: translateY(0px);  }
+}

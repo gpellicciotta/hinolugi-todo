@@ -1,0 +1,53 @@
+/*
+ * Dark Theme
+ * ==========
+ *
+ * CSS styles and variables making up the dark theme.
+ */
+
+@import url('https://www.pellicciotta.com/hinolugi-support.js/css/colors.css');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
+:root {
+  /* Z-levels */
+  --base-z-level: 0;
+  --header-z-level: 10;
+  --dialog-overlay-z-level: 100;
+  --dialog-z-level: 101;
+  --progress-z-level: 300;
+  --tooltip-z-level: 400;
+  --splash-screen-z-level: 900;
+  /* Logo colors */
+  --logo-text-color: var(--blue-hex);
+  --logo-background-color: #3e3e3e;
+  --logo-border-color: var(--blue-hex);
+  /* Text color for most (body) text */
+  --primary-text-color: var(--blue-hex);
+  --primary-text-color-components: var(--blue-components);
+  /* Background color for most (body) text */
+  --primary-background-color: #3e3e3e;
+  --primary-background-color-components: 62, 62, 62;
+  /* Text color for header and footer text, possibly also tooltips and other pop-ups */
+  --secondary-text-color: var(--white-hex);
+  --secondary-text-color-components: var(--white-components);
+  /* Background color for header and footer text */
+  --secondary-background-color: var(--blue-hex);
+  --secondary-background-color-components: var(--blue-components);
+  /* Text color for menus, possibly also tooltips and other pop-ups */
+  --ternary-text-color: var(--white-hex);
+  --ternary-text-color-components: var(--white-components);
+  /* Background color for menus, possibly also tooltips and other pop-ups */
+  --ternary-background-color: var(--grey-hex);
+  --ternary-background-color-components: var(--grey-components);
+}
+
+body {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--primary-background-color);
+  color: var(--primary-text-color);
+}
+
+kbd, code {
+  font-family: 'Roboto Mono', 'Consolas', monospace;
+}
